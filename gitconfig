@@ -1,0 +1,7 @@
+[user]
+	name = Tsuyoshi ISHIDA
+	email = hoshoku16398@gmail.com
+[credential]
+	helper = osxkeychain
+[core]
+	excludesfile = /Users/ish-ts/.gitignore_global
