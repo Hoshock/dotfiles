@@ -4,6 +4,24 @@ username := `whoami`
 default:
   @just -g -l
 
+# ╔═══════════════════════════════╗
+# ║            chezmoi            ║
+# ╚═══════════════════════════════╝
+
+# Show chezmoi diff
+[group('chezmoi')]
+diff:
+  chezmoi diff
+
+# Apply chezmoi changes
+[group('chezmoi')]
+apply:
+  chezmoi apply
+
+# ╔═══════════════════════════════╗
+# ║              Nix              ║
+# ╚═══════════════════════════════╝
+
 # Apply nix-darwin configuration
 [group('nix')]
 darwin:
