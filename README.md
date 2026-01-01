@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - System git installed
+- `~/.config/chezmoi/key.txt` manually migrated
 
 ## Initial Setup
 

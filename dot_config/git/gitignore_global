@@ -5,6 +5,8 @@
 settings.local.json
 
 .python-version
-# pyproject.toml
 requirements*.lock
 .venvs/
+
+# chezmoi age key
+.config/chezmoi/key.txt

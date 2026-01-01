@@ -1,5 +1,11 @@
 sourceDir = "{{ .chezmoi.homeDir }}/Projects/dotfiles"
 workingDir = "{{ .chezmoi.homeDir }}/Projects/dotfiles"
 
+encryption = "age"
+
+[age]
+identity = "{{ .chezmoi.homeDir }}/.config/chezmoi/key.txt"
+recipient = "age1c6uyhlfwu7kycra8hcy5vq7c3vdyyfql6dy0v4fydlq24d490ufqjv7rkp"
+
 [diff]
 exclude = ["scripts"]
