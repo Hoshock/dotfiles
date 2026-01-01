@@ -1,0 +1,48 @@
+eval "$(sheldon source)"
+
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+
+WORKSPACE_DIR="${HOME}/Projects/Workspace"
+
+function sso() {
+    aws sso login
+}
+
+function ipy() {
+    source "${WORKSPACE_DIR}/.venvs/global/.venv/bin/activate"
+    ipython
+    deactivate
+}
+
+function mkvenv() {
+    if [[ "$#" != 3 ]]; then
+        echo "Usage: mkvenv <repo_name> <venv_name> <python_version>"
+        return 1
+    fi
+
+    local _dir="${HOME}/Projects/$1/.venvs/python$3"
+    mkdir -p "${_dir}"
+    cd "${_dir}"
+
+    uv init --name="$2" --no-readme --no-workspace
+    rm -rf hello.py
+    yes | cp "${WORKSPACE_DIR}/.venvs/python$3/pyproject.toml" .
+    yes | cp "${WORKSPACE_DIR}/.venvs/python$3/.python-version" .
+    sed -i '' 's/name = "workspace"/name = "'"$2"'"/' pyproject.toml
+
+    uv sync
+
+    cd -
+}
+
+function activate() {
+    local _dir=$(git rev-parse --show-toplevel)
+
+    if [[ "$#" == 0 ]]; then
+        source "${_dir}/.venv/bin/activate"
+    else
+        source "${_dir}/.venvs/$1/.venv/bin/activate"
+    fi
+}

@@ -1,0 +1,78 @@
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nix-darwin,
+      home-manager,
+    }:
+    let
+      system = "aarch64-darwin";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      hostname = "{{ .chezmoi.hostname }}";
+      username = "{{ .chezmoi.username }}";
+      homedir = "/Users/${username}";
+    in
+    {
+      formatter."${system}" = pkgs.nixfmt-tree;
+
+      # devShells."${system}".default = pkgs.mkShell {
+      #   packages = with pkgs; [
+      #     zenn-cli
+      #   ];
+      # };
+
+      darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
+        inherit system;
+        specialArgs = {
+          inherit
+            system
+            pkgs
+            hostname
+            username
+            homedir
+            ;
+        };
+
+        modules = [
+          {
+            system = {
+              stateVersion = 6;
+              primaryUser = username;
+
+              defaults = {
+                dock = {
+                  autohide = true;
+                  show-recents = false;
+                };
+
+                finder = {
+                  ShowPathbar = true;
+                  ShowStatusBar = true;
+                };
+              };
+            };
+            users.users."${username}".home = homedir;
+          }
+          ./homebrew
+          home-manager.darwinModules.home-manager
+          ./home-manager
+        ];
+      };
+    };
+}

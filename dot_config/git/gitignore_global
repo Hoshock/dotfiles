@@ -1,0 +1,10 @@
+.DS_Store
+.layer/
+.workspace/
+*.code-workspace
+settings.local.json
+
+.python-version
+# pyproject.toml
+requirements*.lock
+.venvs/

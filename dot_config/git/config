@@ -1,0 +1,11 @@
+[user]
+    name = Tsuyoshi ISHIDA
+    email = ish-ts@wni.com
+[core]
+    excludesfile = ~/.config/git/gitignore_global
+[credential]
+    helper = osxkeychain
+[pull]
+    rebase = false
+[init]
+    defaultBranch = main

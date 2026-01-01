@@ -1,0 +1,15 @@
+hostname := `scutil --get LocalHostName`
+username := `whoami`
+
+default:
+  @just -g -l
+
+# Apply nix-darwin configuration
+[group('nix')]
+ndr:
+  sudo darwin-rebuild switch --flake ~/.config/nix#{{hostname}}
+
+# Apply garbage collection to nix store
+[group('nix')]
+nsg:
+  nix store gc
