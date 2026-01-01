@@ -13,6 +13,7 @@
       colima
       deno
       eza
+      fzf
       gh
       git
       htop

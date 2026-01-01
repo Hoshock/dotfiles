@@ -1,5 +1,6 @@
 hostname := `scutil --get LocalHostName`
 username := `whoami`
+workspace := "${HOME}/Projects/Workspace"
 
 default:
   @just -g -l
@@ -25,12 +26,23 @@ apply:
 # Apply nix-darwin configuration
 [group('nix')]
 darwin:
-  sudo darwin-rebuild switch --flake ~/.config/nix#{{hostname}}
+  sudo darwin-rebuild switch --flake ~/.config/nix#{{ hostname }}
 
 # Apply garbage collection to nix store
 [group('nix')]
 gc:
   nix store gc
+
+# ╔═══════════════════════════════╗
+# ║            python             ║
+# ╚═══════════════════════════════╝
+
+# Launch IPython in global virtual environment
+[group('python')]
+i:
+  #!/usr/bin/env bash
+  source "{{ workspace }}/.venvs/global/.venv/bin/activate"
+  ipython
 
 # ╔═══════════════════════════════╗
 # ║             utils             ║

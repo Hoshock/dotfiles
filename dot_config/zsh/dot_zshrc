@@ -3,15 +3,8 @@
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 eval "$(sheldon source)"
-
-WORKSPACE_DIR="${HOME}/Projects/Workspace"
+eval "$(zoxide init zsh)"
 
 function sso() {
     aws sso login
-}
-
-function ipy() {
-    source "${WORKSPACE_DIR}/.venvs/global/.venv/bin/activate"
-    ipython
-    deactivate
 }
