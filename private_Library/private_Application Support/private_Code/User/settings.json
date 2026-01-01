@@ -1,0 +1,377 @@
+{
+  // general
+  "comments.thread.confirmOnCollapse": "never",
+  "debug.console.wordWrap": true,
+  "debug.inlineValues": "on",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.aiStats.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.cursorBlinking": "phase",
+  "editor.dragAndDrop": false,
+  "editor.fontFamily": "'Monaspace Neon', monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "boundary",
+  "editor.wordWrap": "on",
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+  "extensions.ignoreRecommendations": true,
+  "files.exclude": {
+    "**/cdk.context.json": true,
+    "**/cdk.out": true,
+    "**/node_modules": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.venv": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "output.smartScroll.enabled": false,
+  "scm.defaultViewMode": "tree",
+  "scm.repositories.selectionMode": "single",
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.external.osxExec": "Warp.app",
+  "terminal.integrated.confirmOnExit": "never",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "terminal.integrated.inheritEnv": false,
+  "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.tabs.enabled": true,
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 12,
+  "window.zoomLevel": 0,
+
+  // aws
+  "aws.suppressPrompts": {
+    "fileViewerEdit": true
+  },
+  "aws.telemetry": false,
+
+  // front-end
+  "biome.enabled": false,
+  "oxc.enable": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[css][scss][javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.biome": "always",
+      "source.organizeImports.biome": "always"
+    },
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "denoland.vscode-deno",
+    "editor.tabSize": 2
+  },
+  "[vue]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports.biome": "always"
+    },
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.tabSize": 2
+  },
+  "javascript.validate.enable": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  // git/github
+  "chat.agent.enabled": true,
+  "chat.agent.maxRequests": 300,
+  "chat.agent.thinkingStyle": "collapsed",
+  "chat.agentSessionsViewLocation": "view",
+  "chat.tools.terminal.autoApprove": {
+    "pkill": true
+  },
+  "conventionalCommits.emojiFormat": "emoji",
+  "conventionalCommits.promptBody": false,
+  "conventionalCommits.promptFooter": false,
+  "conventionalCommits.showNewVersionNotes": false,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "git.replaceTagsWhenPull": true,
+  "git.suggestSmartCommit": false,
+
+  // "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use conventional commit message format."
+    },
+    {
+      "text": "IMPORTANT: Summarize the changes in a single line."
+    },
+    {
+      "text": "IMPORTANT: Add gitmoji after the colon of commit type."
+    }
+  ],
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.edits.temporalContext.enabled": true,
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "text": "Comment in Japanese."
+    },
+    {
+      "file": ".github/instructions/python.instructions.md"
+    },
+    {
+      "file": ".github/instructions/vue/vue.instructions.md"
+    }
+  ],
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "githubIssues.issueBranchTitle": "feature/issue-${issueNumber}",
+  "githubIssues.workingIssueFormatScm": "",
+  "githubPullRequests.createOnPublishBranch": "never",
+  "githubPullRequests.defaultDeletionMethod.selectLocalBranch": false,
+  "githubPullRequests.experimental.chat": true,
+  "githubPullRequests.experimental.useQuickChat": true,
+  "githubPullRequests.fileListLayout": "tree",
+  "githubPullRequests.pullBranch": "never",
+  "projectManager.git.baseFolders": ["~/Projects"],
+
+  // json/jsonc
+  "[json][jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+
+  // just
+  "[just]": {
+    "editor.defaultFormatter": "nefrob.vscode-just-syntax",
+    "editor.tabSize": 2
+  },
+
+  // nix
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["nixfmt"]
+      },
+      "nixpkgs": {
+        "expr": "import (builtins.getFlake \"${workspaceFolder}\").inputs.nixpkgs { }"
+      },
+      "options": {
+        "nix-darwin": {
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").darwinConfigurations.\"2260-ish-ts\".options"
+        }
+      }
+    }
+  },
+
+  // markdown
+  "[markdown][instructions][chatmode]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "diffEditor.ignoreTrimWhitespace": true
+  },
+  "[prompt]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2,
+    "diffEditor.ignoreTrimWhitespace": true
+  },
+
+  // python
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "always"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "jupyter.askForKernelRestart": false,
+  "jupyter.interactiveWindow.creationMode": "perFile",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
+  },
+  "notebook.confirmDeleteRunningCell": false,
+  "notebook.formatOnSave.enabled": true,
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportAbstractUsage": "information",
+    "reportArgumentType": "information",
+    "reportAssertTypeFailure": "information",
+    "reportAssignmentType": "information",
+    "reportAttributeAccessIssue": "information",
+    "reportCallIssue": "information",
+    "reportInconsistentOverload": "information",
+    "reportIndexIssue": "information",
+    "reportInvalidTypeArguments": "information",
+    "reportInvalidTypeForm": "information",
+    "reportInvalidTypeVarUse": "information",
+    "reportNoOverloadImplementation": "information",
+    "reportOperatorIssue": "information",
+    "reportPossiblyUnboundVariable": "information",
+    "reportRedeclaration": "information",
+    "reportReturnType": "information",
+    "reportUnusedExcept": "information",
+    "reportMissingTypeStubs": "none",
+    "reportPrivateImportUsage": "none",
+    "reportPrivateUsage": "none",
+    "reportUnknownArgumentType": "none",
+    "reportUnknownLambdaType": "none",
+    "reportUnknownMemberType": "none",
+    "reportUnknownParameterType": "none",
+    "reportUnknownVariableType": "none",
+    "reportUntypedFunctionDecorator": "none",
+    "reportUnusedClass": "none",
+    "reportUnusedImport": "none",
+    "reportUnusedFunction": "none",
+    "reportUnusedVariable": "none",
+    "reportUntypedBaseClass": "none",
+    "reportUntypedClassDecorator": "none",
+    "reportUntypedNamedTuple": "none"
+  },
+  "python.analysis.typeCheckingMode": "strict",
+  // "python.experiments.enabled": false,
+  // "python.experiments.optInto": ["pythonTestAdapter"],
+  "python.testing.pytestEnabled": false,
+  "python.testing.pytestArgs": [
+    "-v",
+    "--no-cov",
+    "--cov-config=${workspaceFolder:root}/pyproject.toml"
+  ],
+  "ruff.lineLength": 160,
+  "ruff.lint.ignore": [
+    "ANN401",
+    "BLE",
+    "D",
+    "E501",
+    "EM",
+    "PD002",
+    "PD901",
+    "PLC01",
+    "PLR09",
+    "PLR2004",
+    "PTH123",
+    "TC"
+  ],
+  "ruff.lint.select": ["ALL"],
+
+  // shellscript
+  "[shellscript]": {
+    "editor.defaultFormatter": "mkhl.shfmt",
+    "editor.insertSpaces": true
+  },
+
+  // sql
+  "[sql]": {
+    "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc",
+    "editor.tabSize": 2
+  },
+  "SQL-Formatter-VSCode.dataTypeCase": "lower",
+  "SQL-Formatter-VSCode.dialect": "trino",
+  "SQL-Formatter-VSCode.expressionWidth": 120,
+  "SQL-Formatter-VSCode.keywordCase": "upper",
+  "SQL-Formatter-VSCode.functionCase": "lower",
+  "SQL-Formatter-VSCode.paramTypes": {
+    "custom": [{ "regex": "\\$\\{[a-zA-Z0-9_]+\\}" }]
+  },
+
+  // toml
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+
+  // yaml
+  "[yaml][yml][asl-yaml][github-actions-workflow]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "redhat.telemetry.enabled": false,
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "yaml.validate": false,
+
+  // misc
+  "claudeCode.preferredLocation": "panel",
+  "hediet.vscode-drawio.resizeImages": null,
+  "livePreview.debugOnExternalPreview": true,
+  "peacock.affectActivityBar": false,
+  "peacock.affectSashHover": false,
+  "peacock.favoriteColors": [
+    {
+      "name": "blue",
+      "value": "#008080"
+    },
+    {
+      "name": "green",
+      "value": "#0b4d00"
+    },
+    {
+      "name": "purple",
+      "value": "#660099"
+    },
+    {
+      "name": "red",
+      "value": "#800000"
+    },
+    {
+      "name": "yellow",
+      "value": "#808000"
+    },
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    }
+  ]
+}
