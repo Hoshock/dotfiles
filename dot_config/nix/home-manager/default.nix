@@ -7,11 +7,13 @@
 
     home.packages = with pkgs; [
       awscli2
+      # aws-sam-cli
       bat
       chezmoi
       codex
       colima
       deno
+      docker
       eza
       fzf
       gh
@@ -27,6 +29,7 @@
       nodePackages.aws-cdk
       python313Packages.cfn-lint
       python313Packages.httpie
+      reviewdog
       ripgrep
       sheldon
       shfmt
