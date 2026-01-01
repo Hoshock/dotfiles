@@ -6,9 +6,9 @@ Modern chezmoi and nix-based setup for my systems.
 
 | Category    | Tool                                                                                                             | Purpose                       |
 | ----------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| Dotfiles    | [chezmoi](https://www.chezmoi.io/)                                                                               | Configuration file management |
+| Dotfiles    | [chezmoi](https://github.com/twpayne/chezmoi)                                                                    | Configuration file management |
 | CLI Tools   | [nix-darwin](https://github.com/LnL7/nix-darwin) + [home-manager](https://github.com/nix-community/home-manager) | CLI application management    |
-| GUI Apps    | [nix-darwin](https://github.com/LnL7/nix-darwin) + [Homebrew](https://brew.sh/)                                  | GUI application management    |
+| GUI Apps    | [nix-darwin](https://github.com/LnL7/nix-darwin) + [Homebrew](https://github.com/Homebrew/brew)                  | GUI application management    |
 | Task Runner | [just](https://github.com/casey/just)                                                                            | Command automation            |
 | Zsh Config  | [sheldon](https://github.com/rossmacarthur/sheldon)                                                              | Zsh plugin management         |
 
