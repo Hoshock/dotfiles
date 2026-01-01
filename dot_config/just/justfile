@@ -6,10 +6,10 @@ default:
 
 # Apply nix-darwin configuration
 [group('nix')]
-ndr:
+darwin:
   sudo darwin-rebuild switch --flake ~/.config/nix#{{hostname}}
 
 # Apply garbage collection to nix store
 [group('nix')]
-nsg:
+gc:
   nix store gc

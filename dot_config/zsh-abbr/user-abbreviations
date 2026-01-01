@@ -1,5 +1,6 @@
 abbr "cat"="bat"
 abbr "grep"="rg"
+abbr "jg"="just -g"
 abbr "la"="eza -a --icons --git"
 abbr "ll"="eza -aahl --icons --git"
 abbr "ls"="eza --icons --git"
