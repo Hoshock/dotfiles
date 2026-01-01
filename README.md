@@ -14,9 +14,4 @@ Copy the content of [setup.sh](setup.sh) and run it in your terminal.
 
 ## Later Updates
 
-After relaunch zsh,
-
-```shell
-jg darwin   # apply nix-darwin configuration
-jg gc       # apply garbage collection to nix store
-```
+Just run `jg update`.

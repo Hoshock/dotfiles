@@ -31,3 +31,15 @@ darwin:
 [group('nix')]
 gc:
   nix store gc
+
+# ╔═══════════════════════════════╗
+# ║             utils             ║
+# ╚═══════════════════════════════╝
+
+# Update dotfiles and apply nix-darwin configuration
+[group('utils')]
+update:
+  @just -g diff
+  @just -g apply
+  @just -g darwin
+  @just -g gc

@@ -31,12 +31,14 @@
       shfmt
       ssm-session-manager-plugin
       starship
+      tldr
       tree
       uv
       wget
       xdg-ninja
       yq-go
       zenn-cli
+      zoxide
     ];
   };
 }
