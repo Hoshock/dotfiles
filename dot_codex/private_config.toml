@@ -1,0 +1,12 @@
+model = "gpt-5.2-codex"
+model_reasoning_effort = "medium"
+
+# [mcp_servers.context7]
+# command = "npx"
+# args = ["-y", "@upstash/context7-mcp"]
+# startup_timeout_ms = 20_000
+
+# [mcp_servers.chrome-devtools]
+# command = "npx"
+# args = ["chrome-devtools-mcp@latest", "--isolated=true"]
+# startup_timeout_ms = 30_000

@@ -15,7 +15,9 @@ Modern chezmoi and nix-based setup for my systems.
 ## Prerequisites
 
 - System git installed
-- `~/.config/chezmoi/key.txt` manually migrated
+- Manually migrated
+  - `~/.config/chezmoi/key.txt`
+  - `~/.ssh/*.pem`
 
 ## Initial Setup
 
