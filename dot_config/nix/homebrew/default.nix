@@ -43,6 +43,7 @@
       vscode "pranaygp.vscode-css-peek"
       vscode "ms-toolsai.datawrangler"
       vscode "denoland.vscode-deno"
+      vscode "mkhl.direnv"
       vscode "hediet.vscode-drawio"
       vscode "EditorConfig.EditorConfig"
       vscode "dbaeumer.vscode-eslint"
