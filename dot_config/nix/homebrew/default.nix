@@ -53,6 +53,7 @@
       vscode "GitHub.vscode-pull-request-github"
       vscode "GitHub.remotehub"
       vscode "GitHub.github-vscode-theme"
+      vscode "golang.go"
       vscode "ms-vscode.hexeditor"
       vscode "ecmel.vscode-html-css"
       vscode "oderwat.indent-rainbow"
