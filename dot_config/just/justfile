@@ -20,6 +20,18 @@ apply:
   chezmoi apply
 
 # ╔═══════════════════════════════╗
+# ║              Git              ║
+# ╚═══════════════════════════════╝
+
+# Update and prune git branches
+[group('git')]
+prune:
+  #!/usr/bin/env bash
+  git fetch --all --prune
+  git pull
+  git branch --merged=main | grep -v main | grep -v '*' | xargs git branch -d
+
+# ╔═══════════════════════════════╗
 # ║              Nix              ║
 # ╚═══════════════════════════════╝
 
