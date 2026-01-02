@@ -4,6 +4,20 @@ eval "$(sheldon source)"
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
 
+# This is a workaround to make direnv work with VS Code's integrated terminal
+# when using the direnv extension, by making sure to reload
+# the environment the first time terminal is opened.
+#
+# See https://github.com/direnv/direnv-vscode/issues/561#issuecomment-1837462994.
+#
+# The variable VSCODE_INJECTION is apparently set by VS Code itself, and this is how
+# we can detect if we're running inside the VS Code terminal or not.
+if [[ "$TERM_PROGRAM" == "vscode" && -z "$VSCODE_TERMINAL_DIRENV_LOADED" && -f .envrc ]]; then
+    z ..
+    z -
+    export VSCODE_TERMINAL_DIRENV_LOADED=1
+fi
+
 function sso() {
     aws sso login
 }
