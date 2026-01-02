@@ -13,6 +13,7 @@
       codex
       colima
       deno
+      direnv
       docker
       eza
       fzf
