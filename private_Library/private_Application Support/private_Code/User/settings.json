@@ -255,8 +255,6 @@
     "reportUntypedNamedTuple": "none"
   },
   "python.analysis.typeCheckingMode": "strict",
-  // "python.experiments.enabled": false,
-  // "python.experiments.optInto": ["pythonTestAdapter"],
   "python.testing.pytestEnabled": false,
   "python.testing.pytestArgs": [
     "-v",
