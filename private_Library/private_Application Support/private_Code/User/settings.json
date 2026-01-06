@@ -23,6 +23,10 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
+  "files.associations": {
+    "*.nix.tmpl": "nix",
+    "nix.conf.tmpl": "nix"
+  },
   "files.exclude": {
     "**/cdk.context.json": true,
     "**/cdk.out": true,
