@@ -15,6 +15,7 @@
       deno
       direnv
       docker
+      duckdb
       eza
       fzf
       gh
