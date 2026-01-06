@@ -1,28 +1,10 @@
 hostname := `scutil --get LocalHostName`
 username := `whoami`
 workspace := "${HOME}/Projects/Workspace"
+nixdir := "${HOME}/.config/nix"
 
 default:
   @just -g -l
-
-# ╔═══════════════════════════════╗
-# ║            chezmoi            ║
-# ╚═══════════════════════════════╝
-
-# Show chezmoi diff
-[group('chezmoi')]
-diff:
-  chezmoi diff
-
-# Apply chezmoi changes
-[group('chezmoi')]
-apply:
-  chezmoi apply
-
-# Re-add files to chezmoi
-[group('chezmoi')]
-readd:
-  chezmoi re-add
 
 # ╔═══════════════════════════════╗
 # ║              Git              ║
@@ -55,7 +37,7 @@ prune:
 # Apply nix-darwin configuration
 [group('nix')]
 darwin:
-  sudo darwin-rebuild switch --flake ~/.config/nix#{{ hostname }}
+  sudo darwin-rebuild switch --flake {{ nixdir }}#{{ hostname }}
 
 # Apply garbage collection to nix store
 [group('nix')]
@@ -80,7 +62,10 @@ i:
 # Update dotfiles and apply nix-darwin configuration
 [group('utils')]
 update:
-  @just -g diff
-  @just -g apply
+  chezmoi diff
+  chezmoi apply
+  nix flake update --flake {{ nixdir }}
   @just -g darwin
-  @just -g gc
+  brew upgrade
+  nix store gc
+  brew cleanup
