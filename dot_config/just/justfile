@@ -45,7 +45,7 @@ gc:
   nix store gc
 
 # ╔═══════════════════════════════╗
-# ║            python             ║
+# ║            Python             ║
 # ╚═══════════════════════════════╝
 
 # Launch IPython in global virtual environment
@@ -56,7 +56,7 @@ i:
   ipython
 
 # ╔═══════════════════════════════╗
-# ║             utils             ║
+# ║             Utils             ║
 # ╚═══════════════════════════════╝
 
 # Update dotfiles and apply nix-darwin configuration
