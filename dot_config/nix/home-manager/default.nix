@@ -28,6 +28,7 @@
       nano
       nixd
       nixfmt-rfc-style
+      nodejs_24
       nodePackages.aws-cdk
       python313Packages.cfn-lint
       python313Packages.httpie
