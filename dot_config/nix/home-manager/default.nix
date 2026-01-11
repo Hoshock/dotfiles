@@ -10,6 +10,7 @@
       # aws-sam-cli
       bat
       chezmoi
+      claude-code
       codex
       colima
       deno
