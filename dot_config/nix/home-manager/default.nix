@@ -35,6 +35,7 @@
       python313Packages.httpie
       reviewdog
       ripgrep
+      ruff
       sheldon
       shfmt
       ssm-session-manager-plugin
