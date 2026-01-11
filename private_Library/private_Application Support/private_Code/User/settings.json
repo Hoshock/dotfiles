@@ -107,6 +107,7 @@
   "chat.tools.terminal.autoApprove": {
     "pkill": true
   },
+  "chat.viewSessions.enabled": false,
   "conventionalCommits.emojiFormat": "emoji",
   "conventionalCommits.promptBody": false,
   "conventionalCommits.promptFooter": false,
