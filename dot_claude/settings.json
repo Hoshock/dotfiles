@@ -1,3 +1,6 @@
 {
-  "language": "Japanese"
+  "language": "Japanese",
+  "permissions": {
+    "allow": ["Bash(ruff:*)", "Bash(ty:*)"]
+  }
 }

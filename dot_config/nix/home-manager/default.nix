@@ -42,6 +42,7 @@
       starship
       tldr
       tree
+      ty
       uv
       wget
       xdg-ninja
