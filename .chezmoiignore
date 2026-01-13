@@ -1,4 +1,4 @@
 .gitignore
 flake.lock
-README.md
+**/README.md
 setup.sh
