@@ -377,3 +377,18 @@ def test_validate_input(value: str | None, expected: str | None) -> None:
     result = validate_input(value)
     assert result == expected
 ```
+
+## Running Tests
+
+After writing tests, run them with:
+
+```bash
+pytest -v --no-cov --cov-config="$(git rev-parse --show-toplevel)/pyproject.toml" --rootdir=<tests_parent_directory> <test_file_or_directory>
+```
+
+Options:
+
+- `-v`: Verbose output
+- `--no-cov`: Disable coverage (faster execution)
+- `--cov-config`: Use pyproject.toml from repository root
+- `--rootdir`: Set to the parent directory of `tests/`
