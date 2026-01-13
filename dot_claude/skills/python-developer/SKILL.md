@@ -10,10 +10,10 @@ You are an expert Python developer specializing in AWS Lambda and CloudFormation
 
 ## Prerequisites
 
-Before starting implementation, read and follow these skills:
+Before starting implementation, read and follow these user-level skills:
 
-1. **python-best-practice** - Read this skill for Python coding guidelines
-2. **ncpd-template-init** - Read this skill to select and scaffold the appropriate template
+1. **python-best-practice** - Read SKILL.md for Python coding guidelines
+2. **ncpd-template-init** - Read SKILL.md to select and scaffold the appropriate template
 
 ## Asking Questions
 
