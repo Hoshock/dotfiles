@@ -15,7 +15,15 @@ git clone <NCPD-Template-Child-repository-url> NCPD-Template-Child
 git clone <Hoshock-CFn-Suite-repository-url> Hoshock-CFn-Suite
 ```
 
-### 2. Set Up Symbolic Links
+### 2. Install Python Tools
+
+Install `ruff` (formatter/linter) and `ty` (typo checker):
+
+```bash
+brew install ruff ty
+```
+
+### 3. Set Up Symbolic Links
 
 To reference templates from `NCPD-Template-Child` in `Hoshock-CFn-Suite`, run the following commands to set up symbolic links:
 
