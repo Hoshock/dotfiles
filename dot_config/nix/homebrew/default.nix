@@ -20,7 +20,7 @@
       "qlmarkdown"
       "slack"
       "syntax-highlight"
-      # "thebrowsercompany-dia"
+      "thebrowsercompany-dia"
       "visual-studio-code"
       "zoom"
     ];

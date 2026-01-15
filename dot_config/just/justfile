@@ -131,6 +131,17 @@ darwin:
 gc:
   nix store gc
 
+# Update dotfiles and apply nix-darwin configuration
+[group('nix')]
+update:
+  chezmoi diff
+  chezmoi apply
+  nix flake update --flake {{ nixdir }}
+  @just -g darwin
+  brew upgrade
+  nix store gc
+  brew cleanup
+
 # ╔═══════════════════════════════╗
 # ║            Python             ║
 # ╚═══════════════════════════════╝
@@ -141,18 +152,3 @@ i:
   #!/usr/bin/env bash
   source "{{ workspace }}/.venvs/global/.venv/bin/activate"
   ipython
-
-# ╔═══════════════════════════════╗
-# ║             Utils             ║
-# ╚═══════════════════════════════╝
-
-# Update dotfiles and apply nix-darwin configuration
-[group('utils')]
-update:
-  chezmoi diff
-  chezmoi apply
-  nix flake update --flake {{ nixdir }}
-  @just -g darwin
-  brew upgrade
-  nix store gc
-  brew cleanup
