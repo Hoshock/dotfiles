@@ -82,13 +82,20 @@ wt-find:
 
 # Add a new git worktree for a branch
 [group('git')]
-wt-add branch:
+wt-add branch from="":
   #!/usr/bin/env bash
   set -euo pipefail
 
   BASE_DIR=$(just -g wt-find)
   WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
-  git -C "${BASE_DIR}/repo.git" worktree add "../${WORKTREE_NAME}" "{{ branch }}"
+
+  if [ -n "{{ from }}" ]; then
+    # Create new local branch from specified branch
+    git -C "${BASE_DIR}/repo.git" worktree add -b "{{ branch }}" "${BASE_DIR}/${WORKTREE_NAME}" "{{ from }}"
+  else
+    # Create from remote branch
+    git -C "${BASE_DIR}/repo.git" worktree add "${BASE_DIR}/${WORKTREE_NAME}" "{{ branch }}"
+  fi
 
 # Remove a git worktree for a branch
 [group('git')]
