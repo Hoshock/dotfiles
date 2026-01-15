@@ -98,6 +98,7 @@ wt-add branch from="":
   if [ -n "{{ from }}" ]; then
     # Create new local branch from specified branch
     git -C "${BASE_DIR}/repo.git" worktree add -b "{{ branch }}" "${BASE_DIR}/${WORKTREE_NAME}" "{{ from }}"
+    git -C "${BASE_DIR}/${WORKTREE_NAME}" branch --unset-upstream "{{ branch }}"
   else
     # Create from remote branch
     git -C "${BASE_DIR}/repo.git" worktree add "${BASE_DIR}/${WORKTREE_NAME}" "{{ branch }}"
