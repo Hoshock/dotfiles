@@ -4,8 +4,14 @@ projects := "${HOME}/Projects"
 workspace := "${HOME}/Projects/Workspace"
 nixdir := "${HOME}/.config/nix"
 
+mod wni './wni.just'
+
 default:
+  @echo '[[ global ]]'
   @just -g -l
+  @echo ''
+  @echo '[[ wni ]]'
+  @just -g -l wni
 
 # ╔═══════════════════════════════╗
 # ║              Git              ║
