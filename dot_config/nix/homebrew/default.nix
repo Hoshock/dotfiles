@@ -25,10 +25,10 @@
       "zoom"
     ];
 
-    masApps = {
-      "Stay" = 435410196;
-      "Window Tidy" = 456609775;
-    };
+    # masApps = {
+    #   "Stay" = 435410196;
+    #   "Window Tidy" = 456609775;
+    # };
 
     extraConfig = ''
       vscode "formulahendry.auto-rename-tag"
