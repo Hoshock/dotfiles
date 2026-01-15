@@ -1,5 +1,6 @@
 hostname := `scutil --get LocalHostName`
 username := `whoami`
+projects := "${HOME}/Projects"
 workspace := "${HOME}/Projects/Workspace"
 nixdir := "${HOME}/.config/nix"
 
@@ -16,8 +17,8 @@ init owner repo visibility:
   #!/usr/bin/env bash
   set -euo pipefail
   gh repo create {{ owner }}/{{ repo }} {{ visibility }} --add-readme
-  mkdir -p "${HOME}/Projects/{{ repo }}"
-  cd "${HOME}/Projects/{{ repo }}"
+  mkdir -p "{{ projects }}/{{ repo }}"
+  cd "{{ projects }}/{{ repo }}"
   git init
   git remote add origin "https://github.com/{{ owner }}/{{ repo }}.git"
   git pull origin main
@@ -29,6 +30,77 @@ prune:
   git fetch --all --prune
   git pull
   git branch --merged=main | grep -v main | grep -v '*' | xargs git branch -d
+
+# Clone repository as bare with worktree structure
+[group('git')]
+clone owner repo:
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  BASE_DIR="{{ projects }}/{{ repo }}"
+  mkdir -p "${BASE_DIR}"
+
+  git clone --bare --single-branch --branch main "https://github.com/{{ owner }}/{{ repo }}.git" "${BASE_DIR}/repo.git"
+  git -C "${BASE_DIR}/repo.git" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+  git -C "${BASE_DIR}/repo.git" fetch origin
+  git -C "${BASE_DIR}/repo.git" worktree add ../main
+  git -C "${BASE_DIR}/main" branch --set-upstream-to=origin/main main
+
+# Find the base directory of the git worktree
+[group('git')]
+wt-find:
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # First, try git rev-parse (fastest if in a worktree)
+  BARE_REPO=$(git rev-parse --git-common-dir 2>/dev/null || echo "")
+  if [ -n "${BARE_REPO}" ] && [ "${BARE_REPO}" != ".git" ]; then
+    BARE_REPO=$(cd "${BARE_REPO}" && pwd)
+  else
+    BARE_REPO=""
+  fi
+
+  # If not found, search upwards for repo.git
+  if [ -z "${BARE_REPO}" ]; then
+    CURRENT_DIR="$(pwd)"
+    while [ "$CURRENT_DIR" != "{{ projects }}" ]; do
+      if [ -d "${CURRENT_DIR}/repo.git" ]; then
+        BARE_REPO="${CURRENT_DIR}/repo.git"
+        break
+      fi
+      CURRENT_DIR=$(dirname "$CURRENT_DIR")
+    done
+  fi
+
+  if [ -z "${BARE_REPO}" ]; then
+    echo "Error: Could not find repo.git directory" >&2
+    exit 1
+  fi
+
+  # Return the parent directory of repo.git
+  dirname "${BARE_REPO}"
+
+# Add a new git worktree for a branch
+[group('git')]
+wt-add branch:
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  BASE_DIR=$(just -g wt-find)
+  WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+  git -C "${BASE_DIR}/repo.git" worktree add "../${WORKTREE_NAME}" "{{ branch }}"
+
+# Remove a git worktree for a branch
+[group('git')]
+wt-del branch:
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  BASE_DIR=$(just -g wt-find)
+  WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+  git -C "${BASE_DIR}/repo.git" worktree remove "${WORKTREE_NAME}"
+  git -C "${BASE_DIR}/repo.git" worktree prune
+  git -C "${BASE_DIR}/repo.git" branch -d "{{ branch }}"
 
 # ╔═══════════════════════════════╗
 # ║              Nix              ║
