@@ -7,10 +7,11 @@ nixdir := "${HOME}/.config/nix"
 mod wni './wni.just'
 
 default:
-  @echo '[[ global ]]'
+  @echo ''
+  @bash -c 'echo -e "\033[1m\033[32m[global]\033[0m"'
   @just -g -l
   @echo ''
-  @echo '[[ wni ]]'
+  @bash -c 'echo -e "\033[1m\033[34m[wni]\033[0m"'
   @just -g -l wni
 
 # ╔═══════════════════════════════╗
