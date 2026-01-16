@@ -1,13 +1,13 @@
-# tmpl-data-schedule
+# tmpl-data-stock
 
-EventBridge Scheduler → SQS → Lambda architecture for scheduled data processing.
+SNS → SQS → Lambda architecture for Stock on S3 data processing.
 
 ## Architecture
 
 ```txt
-EventBridge Scheduler → SQS Queue → Lambda Function
-                            ↓
-                       Dead Letter Queue → CloudWatch Alarm
+SNS Topic → SQS Queue → Lambda Function
+                ↓
+           Dead Letter Queue → CloudWatch Alarm
 ```
 
 ## Components
@@ -15,10 +15,10 @@ EventBridge Scheduler → SQS Queue → Lambda Function
 ### CloudFormation Resources
 
 - **AWS::Serverless::Function** - Lambda function with SQS event source
-- **AWS::Scheduler::Schedule** - EventBridge Scheduler with cron expression
 - **AWS::SQS::Queue** - Main queue with DLQ redrive policy
 - **AWS::SQS::Queue** - Dead letter queue for failed messages
 - **AWS::CloudWatch::Alarm** - Alarm on DLQ message count
+- **AWS::SNS::Subscription** - SNS to SQS subscription with filter policy
 - **AWS::Logs::LogGroup** - CloudWatch log group with retention
 - **AWS::Logs::SubscriptionFilter** - Log filter for alerts
 
@@ -31,8 +31,8 @@ EventBridge Scheduler → SQS Queue → Lambda Function
 
 ### Key Features
 
-- Cron-based scheduling with Asia/Tokyo timezone
 - Batch processing with `ReportBatchItemFailures`
+- SNS filter policy support (`time_diff <= 3600`)
 - DLQ with 3 retry attempts
 - Log subscription for WARNING/ERROR alerts
 
@@ -47,36 +47,36 @@ EventBridge Scheduler → SQS Queue → Lambda Function
 │   └── param_stg.json
 ├── src/
 │   ├── app/
+│   │   ├── values/
+│   │   │   └── __init__.py
 │   │   ├── __init__.py
 │   │   ├── __main__.py
-│   │   ├── lambda_function.py
-│   │   └── values/
-│   │       └── __init__.py
+│   │   └── lambda_function.py
 │   └── tests/
 │       └── __init__.py
-├── template.yaml
 ├── deploy_pipeline.sh
 ├── sync.sh
+├── template.yaml
 └── upload_to_pipeline.sh
 ```
 
 ## Usage
 
 ```bash
-~/.claude/skills/ncpd-template-init/scripts/tmpl-data-schedule.sh <destination_path> <directory_name>
+~/.claude/skills/ncpd-cfn-init/scripts/scaffold.sh tmpl-data-stock <destination_path> <directory_name>
 ```
 
-## Customization Points
+## Minimum Customization Points
 
 After copying, modify:
 
 1. **template.yaml**
 
-   - `Schedule.ScheduleExpression` - Set cron expression (e.g., `cron(0 9 * * ? *)`)
+   - `Mappings.Const.Topic.Arn` - Set correct SNS topic ARN
 
 2. **src/app/lambda_function.py**
 
-   - Implement `record_handler` function body (receives `time: Timestamp`, `detail: dict`)
+   - Implement `record_handler` function body
 
 3. **src/app/values/\_\_init\_\_.py**
    - Add constants and environment variables

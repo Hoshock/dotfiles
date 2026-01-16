@@ -1,5 +1,5 @@
 ---
-name: ncpd-template-init
+name: ncpd-cfn-init
 description: AWS CloudFormation templates for Lambda projects. Use when scaffolding new CloudFormation stacks.
 ---
 
@@ -11,8 +11,8 @@ This skill helps you scaffold AWS CloudFormation templates with Lambda functions
 
 | Template           | Description                                    | Details                                          |
 | ------------------ | ---------------------------------------------- | ------------------------------------------------ |
-| tmpl-data-stock    | SNS → SQS → Lambda Stock on S3 data processing | [tmpl-data-stock.md](./tmpl-data-stock.md)       |
 | tmpl-data-schedule | Scheduler → SQS → Lambda scheduled task        | [tmpl-data-schedule.md](./tmpl-data-schedule.md) |
+| tmpl-data-stock    | SNS → SQS → Lambda Stock on S3 data processing | [tmpl-data-stock.md](./tmpl-data-stock.md)       |
 
 ## Usage
 
@@ -20,5 +20,5 @@ This skill helps you scaffold AWS CloudFormation templates with Lambda functions
 2. Run the shell script in `scripts/` to copy the template:
 
 ```bash
-~/.claude/skills/ncpd-template-init/scripts/<template_name>.sh <destination_path> <directory_name>
+~/.claude/skills/ncpd-cfn-init/scripts/scaffold.sh <template_name> <destination_path> <directory_name>
 ```
