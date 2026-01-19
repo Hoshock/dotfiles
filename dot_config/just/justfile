@@ -18,25 +18,43 @@ default:
 # ║              Git              ║
 # ╚═══════════════════════════════╝
 
-# Create a new GitHub repo
+# Create a new GitHub repo with bare repository structure
 [group('git')]
-init owner repo visibility:
-  #!/usr/bin/env bash
-  set -euo pipefail
+init owner repo visibility: && (clone owner repo)
   gh repo create {{ owner }}/{{ repo }} {{ visibility }} --add-readme
-  mkdir -p "{{ projects }}/{{ repo }}"
-  cd "{{ projects }}/{{ repo }}"
-  git init
-  git remote add origin "https://github.com/{{ owner }}/{{ repo }}.git"
-  git pull origin main
 
 # Update and prune git branches
 [group('git')]
 prune:
   #!/usr/bin/env bash
-  git fetch --all --prune
-  git pull
-  git branch --merged=main | grep -v main | grep -v '*' | xargs git branch -d
+  set -euo pipefail
+
+  BASE_DIR=$(just -g wt-find 2>/dev/null || echo "")
+  if [ -n "${BASE_DIR}" ]; then
+    GIT_DIR="${BASE_DIR}/repo.git"
+
+    git -C "${GIT_DIR}" fetch --all --prune
+
+    MERGED=$(git -C "${GIT_DIR}" branch --merged=main | grep -v main | grep -v '\*' || true)
+    if [ -n "${MERGED}" ]; then
+      echo "${MERGED}" | while read -r branch; do
+        branch=$(echo "${branch}" | xargs)
+        WORKTREE_NAME=$(echo "${branch}" | tr '/' '-')
+        if [ -d "${BASE_DIR}/${WORKTREE_NAME}" ]; then
+          just -g wt-del "${branch}"
+        else
+          git -C "${GIT_DIR}" branch -d "${branch}"
+        fi
+      done
+    fi
+  else
+    git fetch --all --prune
+
+    MERGED=$(git branch --merged=main | grep -v main | grep -v '\*' || true)
+    if [ -n "${MERGED}" ]; then
+      echo "${MERGED}" | xargs git branch -d
+    fi
+  fi
 
 # Clone repository as bare with worktree structure
 [group('git')]
@@ -116,6 +134,16 @@ wt-del branch:
   git -C "${BASE_DIR}/repo.git" worktree remove "${WORKTREE_NAME}"
   git -C "${BASE_DIR}/repo.git" worktree prune
   git -C "${BASE_DIR}/repo.git" branch -d "{{ branch }}"
+
+# Open VS Code workspace for a git worktree branch
+[group('git')]
+wt-open branch workspace="default":
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  BASE_DIR=$(just -g wt-find)
+  WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+  code -r "${BASE_DIR}/${WORKTREE_NAME}/.workspace/{{ workspace }}.code-workspace"
 
 # ╔═══════════════════════════════╗
 # ║              Nix              ║
