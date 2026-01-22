@@ -1,4 +1,5 @@
 .claude/debug
+.claude/deprecated
 .gitignore
 .ruff_cache
 flake.lock
