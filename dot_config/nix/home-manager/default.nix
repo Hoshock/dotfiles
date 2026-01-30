@@ -7,7 +7,7 @@
 
     home.packages = with pkgs; [
       awscli2
-      # aws-sam-cli
+      aws-sam-cli
       bat
       chezmoi
       claude-code

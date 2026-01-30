@@ -4,10 +4,6 @@
     enable = true;
     onActivation.autoUpdate = true;
 
-    brews = [
-      "aws-sam-cli"
-    ];
-
     casks = [
       "appcleaner"
       "arc"
