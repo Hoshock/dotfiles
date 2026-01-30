@@ -119,7 +119,6 @@
   "git.replaceTagsWhenPull": true,
   "git.suggestSmartCommit": false,
 
-  // "github.copilot.chat.agent.thinkingTool": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -134,17 +133,6 @@
   ],
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "github.copilot.chat.edits.temporalContext.enabled": true,
-  "github.copilot.chat.reviewSelection.instructions": [
-    {
-      "text": "Comment in Japanese."
-    },
-    {
-      "file": ".github/instructions/python.instructions.md"
-    },
-    {
-      "file": ".github/instructions/vue/vue.instructions.md"
-    }
-  ],
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -225,42 +213,6 @@
   },
   "notebook.confirmDeleteRunningCell": false,
   "notebook.formatOnSave.enabled": true,
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportAbstractUsage": "information",
-    "reportArgumentType": "information",
-    "reportAssertTypeFailure": "information",
-    "reportAssignmentType": "information",
-    "reportAttributeAccessIssue": "information",
-    "reportCallIssue": "information",
-    "reportInconsistentOverload": "information",
-    "reportIndexIssue": "information",
-    "reportInvalidTypeArguments": "information",
-    "reportInvalidTypeForm": "information",
-    "reportInvalidTypeVarUse": "information",
-    "reportNoOverloadImplementation": "information",
-    "reportOperatorIssue": "information",
-    "reportPossiblyUnboundVariable": "information",
-    "reportRedeclaration": "information",
-    "reportReturnType": "information",
-    "reportUnusedExcept": "information",
-    "reportMissingTypeStubs": "none",
-    "reportPrivateImportUsage": "none",
-    "reportPrivateUsage": "none",
-    "reportUnknownArgumentType": "none",
-    "reportUnknownLambdaType": "none",
-    "reportUnknownMemberType": "none",
-    "reportUnknownParameterType": "none",
-    "reportUnknownVariableType": "none",
-    "reportUntypedFunctionDecorator": "none",
-    "reportUnusedClass": "none",
-    "reportUnusedImport": "none",
-    "reportUnusedFunction": "none",
-    "reportUnusedVariable": "none",
-    "reportUntypedBaseClass": "none",
-    "reportUntypedClassDecorator": "none",
-    "reportUntypedNamedTuple": "none"
-  },
-  "python.analysis.typeCheckingMode": "strict",
   "python.testing.pytestEnabled": false,
   "python.testing.pytestArgs": [
     "-v",
@@ -314,40 +266,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
   },
-  "redhat.telemetry.enabled": false,
-  "yaml.customTags": [
-    "!And",
-    "!And sequence",
-    "!If",
-    "!If sequence",
-    "!Not",
-    "!Not sequence",
-    "!Equals",
-    "!Equals sequence",
-    "!Or",
-    "!Or sequence",
-    "!FindInMap",
-    "!FindInMap sequence",
-    "!Base64",
-    "!Join",
-    "!Join sequence",
-    "!Cidr",
-    "!Ref",
-    "!Sub",
-    "!Sub sequence",
-    "!GetAtt",
-    "!GetAZs",
-    "!ImportValue",
-    "!ImportValue sequence",
-    "!Select",
-    "!Select sequence",
-    "!Split",
-    "!Split sequence"
-  ],
-  "yaml.validate": false,
 
   // misc
-  "claudeCode.preferredLocation": "panel",
   "hediet.vscode-drawio.resizeImages": null,
   "livePreview.debugOnExternalPreview": true,
   "peacock.affectActivityBar": false,

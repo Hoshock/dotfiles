@@ -33,10 +33,8 @@
     extraConfig = ''
       vscode "formulahendry.auto-rename-tag"
       vscode "njpwerner.autodocstring"
-      vscode "amazonwebservices.aws-toolkit-vscode"
       vscode "aaron-bond.better-comments"
       vscode "biomejs.biome"
-      vscode "Anthropic.claude-code"
       vscode "kddejong.vscode-cfn-lint"
       vscode "openai.chatgpt"
       vscode "vivaxy.vscode-conventional-commits"
@@ -76,7 +74,7 @@
       vscode "johnpapa.vscode-peacock"
       vscode "esbenp.prettier-vscode"
       vscode "alefragnani.project-manager"
-      vscode "ms-python.vscode-pylance"
+      # vscode "ms-python.vscode-pylance"
       vscode "ms-python.python"
       vscode "ms-python.debugpy"
       vscode "mechatroner.rainbow-csv"
@@ -91,11 +89,11 @@
       vscode "ReneSaarsoo.sql-formatter-vsc"
       vscode "stylelint.vscode-stylelint"
       vscode "shardulm94.trailing-spaces"
+      vscode "astral-sh.ty"
       vscode "vitest.explorer"
       vscode "Vue.volar"
       vscode "CelianRiboulet.webvalidator"
       vscode "nefrob.vscode-just-syntax"
-      vscode "redhat.vscode-yaml"
       vscode "mosapride.zenkaku"
     '';
   };
