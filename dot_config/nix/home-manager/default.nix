@@ -28,7 +28,7 @@
       mas
       nano
       nixd
-      nixfmt-rfc-style
+      nixfmt
       nodejs_24
       nodePackages.aws-cdk
       python313Packages.cfn-lint
@@ -38,7 +38,7 @@
       ruff
       sheldon
       shfmt
-      ssm-session-manager-plugin
+      # ssm-session-manager-plugin
       starship
       tldr
       tree

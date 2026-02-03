@@ -38,12 +38,6 @@
     {
       formatter."${system}" = pkgs.nixfmt-tree;
 
-      # devShells."${system}".default = pkgs.mkShell {
-      #   packages = with pkgs; [
-      #     zenn-cli
-      #   ];
-      # };
-
       darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
         inherit system;
         specialArgs = {
