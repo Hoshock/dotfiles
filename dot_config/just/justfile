@@ -133,7 +133,7 @@ wt-del branch:
   WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
   git -C "${BASE_DIR}/repo.git" worktree remove "${WORKTREE_NAME}"
   git -C "${BASE_DIR}/repo.git" worktree prune
-  git -C "${BASE_DIR}/repo.git" branch -d "{{ branch }}"
+  git -C "${BASE_DIR}/repo.git" branch -D "{{ branch }}"
 
 # Open VS Code workspace for a git worktree branch
 [group('git')]

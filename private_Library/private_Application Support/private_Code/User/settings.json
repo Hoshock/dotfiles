@@ -219,7 +219,7 @@
     "--no-cov",
     "--cov-config=${workspaceFolder:root}/pyproject.toml",
   ],
-  "ruff.lineLength": 160,
+  "ruff.lineLength": 120,
   "ruff.lint.ignore": [
     "ANN401",
     "BLE",
