@@ -4,6 +4,7 @@
   "debug.console.wordWrap": true,
   "debug.inlineValues": "on",
   "diffEditor.ignoreTrimWhitespace": false,
+  "editor.accessibilitySupport": "on",
   "editor.aiStats.enabled": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorBlinking": "phase",

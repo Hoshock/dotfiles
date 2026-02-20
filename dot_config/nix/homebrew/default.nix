@@ -6,10 +6,12 @@
 
     casks = [
       "appcleaner"
+      "aqua-voice"
       "arc"
       "clipy"
       "font-hack-nerd-font"
       "font-monaspace"
+      "ghostty"
       "google-chrome"
       "google-japanese-ime"
       "karabiner-elements"

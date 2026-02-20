@@ -5,3 +5,4 @@
 flake.lock
 **/README.md
 setup.sh
+install.sh

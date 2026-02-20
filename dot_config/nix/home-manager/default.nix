@@ -10,7 +10,6 @@
       aws-sam-cli
       bat
       chezmoi
-      claude-code
       codex
       colima
       deno
@@ -25,6 +24,7 @@
       jnv
       jq
       just
+      just-lsp
       mas
       nano
       nixd
@@ -40,6 +40,7 @@
       shfmt
       # ssm-session-manager-plugin
       starship
+      terminal-notifier
       tldr
       tree
       ty

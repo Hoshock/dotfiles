@@ -24,11 +24,7 @@
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;
-        config.allowUnfreePredicate =
-          pkg:
-          builtins.elem (nixpkgs.lib.getName pkg) [
-            "claude-code"
-          ];
+        config.allowUnfree = false;
       };
 
       hostname = "{{ .chezmoi.hostname }}";

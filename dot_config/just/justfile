@@ -1,182 +1,195 @@
 hostname := `scutil --get LocalHostName`
-username := `whoami`
 projects := "${HOME}/Projects"
 workspace := "${HOME}/Projects/Workspace"
 nixdir := "${HOME}/.config/nix"
 
-mod wni './wni.just'
-
 default:
-  @echo ''
-  @bash -c 'echo -e "\033[1m\033[32m[global]\033[0m"'
-  @just -g -l
-  @echo ''
-  @bash -c 'echo -e "\033[1m\033[34m[wni]\033[0m"'
-  @just -g -l wni
+    @just -g -l
 
-# ╔═══════════════════════════════╗
-# ║              Git              ║
-# ╚═══════════════════════════════╝
+# ================================
+#              Git
+# ================================
 
 # Create a new GitHub repo with bare repository structure
 [group('git')]
 init owner repo visibility: && (clone owner repo)
-  gh repo create {{ owner }}/{{ repo }} {{ visibility }} --add-readme
+    gh repo create {{ owner }}/{{ repo }} {{ visibility }} --add-readme
 
 # Update and prune git branches
 [group('git')]
 prune:
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  BASE_DIR=$(just -g wt-find 2>/dev/null || echo "")
-  if [ -n "${BASE_DIR}" ]; then
-    GIT_DIR="${BASE_DIR}/repo.git"
+    BASE_DIR=$(just -g wt-find 2>/dev/null || echo "")
+    if [ -n "${BASE_DIR}" ]; then
+      GIT_DIR="${BASE_DIR}/repo.git"
 
-    git -C "${GIT_DIR}" fetch --all --prune
+      git -C "${GIT_DIR}" fetch --all --prune
 
-    MERGED=$(git -C "${GIT_DIR}" branch --merged=main | grep -v main | grep -v '\*' || true)
-    if [ -n "${MERGED}" ]; then
-      echo "${MERGED}" | while read -r branch; do
-        branch=$(echo "${branch}" | xargs)
-        WORKTREE_NAME=$(echo "${branch}" | tr '/' '-')
-        if [ -d "${BASE_DIR}/${WORKTREE_NAME}" ]; then
-          just -g wt-del "${branch}"
-        else
-          git -C "${GIT_DIR}" branch -d "${branch}"
-        fi
-      done
+      MERGED=$(git -C "${GIT_DIR}" branch --merged=main | grep -v main | grep -v '\*' || true)
+      if [ -n "${MERGED}" ]; then
+        echo "${MERGED}" | while read -r branch; do
+          branch=$(echo "${branch}" | xargs)
+          WORKTREE_NAME=$(echo "${branch}" | tr '/' '-')
+          if [ -d "${BASE_DIR}/${WORKTREE_NAME}" ]; then
+            just -g wt-del "${branch}"
+          else
+            git -C "${GIT_DIR}" branch -d "${branch}"
+          fi
+        done
+      fi
+    else
+      git fetch --all --prune
+
+      MERGED=$(git branch --merged=main | grep -v main | grep -v '\*' || true)
+      if [ -n "${MERGED}" ]; then
+        echo "${MERGED}" | xargs git branch -d
+      fi
     fi
-  else
-    git fetch --all --prune
-
-    MERGED=$(git branch --merged=main | grep -v main | grep -v '\*' || true)
-    if [ -n "${MERGED}" ]; then
-      echo "${MERGED}" | xargs git branch -d
-    fi
-  fi
 
 # Clone repository as bare with worktree structure
 [group('git')]
 clone owner repo:
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  BASE_DIR="{{ projects }}/{{ repo }}"
-  mkdir -p "${BASE_DIR}"
+    BASE_DIR="{{ projects }}/{{ repo }}"
+    mkdir -p "${BASE_DIR}"
 
-  git clone --bare --single-branch --branch main "https://github.com/{{ owner }}/{{ repo }}.git" "${BASE_DIR}/repo.git"
-  git -C "${BASE_DIR}/repo.git" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-  git -C "${BASE_DIR}/repo.git" fetch origin
-  git -C "${BASE_DIR}/repo.git" worktree add ../main
-  git -C "${BASE_DIR}/main" branch --set-upstream-to=origin/main main
+    git clone --bare --single-branch --branch main "https://github.com/{{ owner }}/{{ repo }}.git" "${BASE_DIR}/repo.git"
+    git -C "${BASE_DIR}/repo.git" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+    git -C "${BASE_DIR}/repo.git" fetch origin
+    git -C "${BASE_DIR}/repo.git" worktree add ../main
+    git -C "${BASE_DIR}/main" branch --set-upstream-to=origin/main main
 
 # Find the base directory of the git worktree
 [group('git')]
 wt-find:
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  # First, try git rev-parse (fastest if in a worktree)
-  BARE_REPO=$(git rev-parse --git-common-dir 2>/dev/null || echo "")
-  if [ -n "${BARE_REPO}" ] && [ "${BARE_REPO}" != ".git" ]; then
-    BARE_REPO=$(cd "${BARE_REPO}" && pwd)
-  else
-    BARE_REPO=""
-  fi
+    # First, try git rev-parse (fastest if in a worktree)
+    BARE_REPO=$(git rev-parse --git-common-dir 2>/dev/null || echo "")
+    if [ -n "${BARE_REPO}" ] && [ "${BARE_REPO}" != ".git" ]; then
+      BARE_REPO=$(cd "${BARE_REPO}" && pwd)
+    else
+      BARE_REPO=""
+    fi
 
-  # If not found, search upwards for repo.git
-  if [ -z "${BARE_REPO}" ]; then
-    CURRENT_DIR="$(pwd)"
-    while [ "$CURRENT_DIR" != "{{ projects }}" ]; do
-      if [ -d "${CURRENT_DIR}/repo.git" ]; then
-        BARE_REPO="${CURRENT_DIR}/repo.git"
-        break
-      fi
-      CURRENT_DIR=$(dirname "$CURRENT_DIR")
-    done
-  fi
+    # If not found, search upwards for repo.git
+    if [ -z "${BARE_REPO}" ]; then
+      CURRENT_DIR="$(pwd)"
+      while [ "$CURRENT_DIR" != "/" ] && [ "$CURRENT_DIR" != "{{ projects }}" ]; do
+        if [ -d "${CURRENT_DIR}/repo.git" ]; then
+          BARE_REPO="${CURRENT_DIR}/repo.git"
+          break
+        fi
+        CURRENT_DIR=$(dirname "$CURRENT_DIR")
+      done
+    fi
 
-  if [ -z "${BARE_REPO}" ]; then
-    echo "Error: Could not find repo.git directory" >&2
-    exit 1
-  fi
+    if [ -z "${BARE_REPO}" ]; then
+      echo "Error: Could not find repo.git directory" >&2
+      exit 1
+    fi
 
-  # Return the parent directory of repo.git
-  dirname "${BARE_REPO}"
+    # Return the parent directory of repo.git
+    dirname "${BARE_REPO}"
 
 # Add a new git worktree for a branch
 [group('git')]
 wt-add branch from="":
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  BASE_DIR=$(just -g wt-find)
-  WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+    BASE_DIR=$(just -g wt-find)
+    WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
 
-  if [ -n "{{ from }}" ]; then
-    # Create new local branch from specified branch
-    git -C "${BASE_DIR}/repo.git" worktree add -b "{{ branch }}" "${BASE_DIR}/${WORKTREE_NAME}" "{{ from }}"
-    git -C "${BASE_DIR}/${WORKTREE_NAME}" branch --unset-upstream "{{ branch }}"
-  else
-    # Create from remote branch
-    git -C "${BASE_DIR}/repo.git" worktree add "${BASE_DIR}/${WORKTREE_NAME}" "{{ branch }}"
-  fi
+    if [ -n "{{ from }}" ]; then
+      # Create new local branch from specified branch
+      git -C "${BASE_DIR}/repo.git" worktree add -b "{{ branch }}" "${BASE_DIR}/${WORKTREE_NAME}" "{{ from }}"
+      if git -C "${BASE_DIR}/${WORKTREE_NAME}" rev-parse --abbrev-ref "{{ branch }}@{upstream}" &>/dev/null; then
+        git -C "${BASE_DIR}/${WORKTREE_NAME}" branch --unset-upstream "{{ branch }}"
+      fi
+    else
+      # Create from remote branch
+      git -C "${BASE_DIR}/repo.git" worktree add "${BASE_DIR}/${WORKTREE_NAME}" "{{ branch }}"
+    fi
 
 # Remove a git worktree for a branch
 [group('git')]
 wt-del branch:
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  BASE_DIR=$(just -g wt-find)
-  WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
-  git -C "${BASE_DIR}/repo.git" worktree remove "${WORKTREE_NAME}"
-  git -C "${BASE_DIR}/repo.git" worktree prune
-  git -C "${BASE_DIR}/repo.git" branch -D "{{ branch }}"
+    BASE_DIR=$(just -g wt-find)
+    WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+    git -C "${BASE_DIR}/repo.git" worktree remove "${WORKTREE_NAME}"
+    git -C "${BASE_DIR}/repo.git" worktree prune
+    git -C "${BASE_DIR}/repo.git" branch -D "{{ branch }}"
 
 # Open VS Code workspace for a git worktree branch
 [group('git')]
 wt-open branch workspace="default":
-  #!/usr/bin/env bash
-  set -euo pipefail
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-  BASE_DIR=$(just -g wt-find)
-  WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
-  code -r "${BASE_DIR}/${WORKTREE_NAME}/.workspace/{{ workspace }}.code-workspace"
+    BASE_DIR=$(just -g wt-find)
+    WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+    code -r "${BASE_DIR}/${WORKTREE_NAME}/.workspace/{{ workspace }}.code-workspace"
 
-# ╔═══════════════════════════════╗
-# ║              Nix              ║
-# ╚═══════════════════════════════╝
+# ================================
+#              Nix
+# ================================
 
 # Apply nix-darwin configuration
 [group('nix')]
 darwin:
-  sudo darwin-rebuild switch --flake {{ nixdir }}#{{ hostname }}
+    sudo darwin-rebuild switch --flake {{ nixdir }}#{{ hostname }}
 
 # Apply garbage collection to nix store
 [group('nix')]
 gc:
-  nix store gc
+    nix store gc
+
+# Install tools managed outside nix
+[group('nix')]
+install:
+    bash {{ projects }}/dotfiles/install.sh
 
 # Update dotfiles and apply nix-darwin configuration
 [group('nix')]
-update:
-  chezmoi diff
-  chezmoi apply
-  nix flake update --flake {{ nixdir }}
-  @just -g darwin
-  brew upgrade
-  nix store gc
-  brew cleanup
+update flag="partial":
+    chezmoi diff
+    chezmoi apply
+    {{ if flag == "full" { "just -g install" } else { "" } }}
+    nix flake update --flake {{ nixdir }}
+    @just -g darwin
+    brew upgrade
+    nix store gc
+    brew cleanup
 
-# ╔═══════════════════════════════╗
-# ║            Python             ║
-# ╚═══════════════════════════════╝
+# ================================
+#            Claude
+# ================================
+
+# Run Claude with custom CA certificate
+[group('claude')]
+claude *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    cd {{ invocation_directory() }}
+    NODE_EXTRA_CA_CERTS=${HOME}/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer claude {{ args }}
+
+# ================================
+#            Python
+# ================================
 
 # Launch IPython in global virtual environment
 [group('python')]
 i:
-  #!/usr/bin/env bash
-  source "{{ workspace }}/.venvs/global/.venv/bin/activate"
-  ipython
+    #!/usr/bin/env bash
+    source "{{ workspace }}/.venvs/python3.13/.venv/bin/activate"
+    ipython
