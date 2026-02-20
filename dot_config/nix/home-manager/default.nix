@@ -25,6 +25,7 @@
       jq
       just
       just-lsp
+      lazygit
       mas
       nano
       nixd

@@ -4,6 +4,10 @@
     enable = true;
     onActivation.autoUpdate = true;
 
+    brews = [
+      "yazi"
+    ];
+
     casks = [
       "appcleaner"
       "aqua-voice"
