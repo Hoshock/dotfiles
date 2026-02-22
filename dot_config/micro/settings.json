@@ -1,3 +1,7 @@
 {
-  "colorscheme": "github-dark-dimmed"
+  "colorscheme": "github-dark-dimmed",
+  "eofnewline": true,
+  "hltaberrors": true,
+  "hltrailingws": true,
+  "rmtrailingws": true
 }

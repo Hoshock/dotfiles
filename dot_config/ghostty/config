@@ -1,9 +1,9 @@
 font-family = "Monaspace Neon"
 font-family = "monospace"
 
-keybind = cmd+c=text:\x03
+# keybind = cmd+c=text:\x03
 keybind = cmd+s=text:\x13
-keybind = cmd+v=text:\x16
+# keybind = cmd+v=text:\x16
 keybind = cmd+x=text:\x1bx
 keybind = cmd+z=text:\x1A
 keybind = cmd+slash=text:\x1b/
@@ -13,3 +13,6 @@ keybind = shift+cmd+z=text:\x19
 macos-option-as-alt = left
 
 theme = GitHub Dark Dimmed
+
+unfocused-split-opacity = 0.7
+unfocused-split-fill = #000000
