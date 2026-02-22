@@ -33,12 +33,14 @@
       nixfmt
       nodejs_24
       nodePackages.aws-cdk
+      prettier
       python313Packages.cfn-lint
       python313Packages.httpie
       reviewdog
       ripgrep
       ruff
       sheldon
+      shellcheck
       shfmt
       # ssm-session-manager-plugin
       starship
