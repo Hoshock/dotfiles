@@ -1,0 +1,21 @@
+{
+  "Alt-f": "FindLiteral",
+  "Alt-p": "CommandMode",
+  "Alt-x": "Cut|CutLine",
+
+  "Ctrl-a": "StartOfLine",
+  "Ctrl-b": "CursorLeft",
+  // "Ctrl-c": "Copy|CopyLine",
+  "Ctrl-d": "Delete",
+  "Ctrl-e": "EndOfLine",
+  "Ctrl-f": "CursorRight",
+  // "Ctrl-h": "Backspace",
+  "Ctrl-n": "CursorDown",
+  "Ctrl-o": "Save",
+  "Ctrl-p": "CursorUp",
+  // "Ctrl-s": "Save",
+  // "Ctrl-v": "Paste",
+  "Ctrl-x": "Quit",
+  // "Ctrl-y": "Redo",
+  // "Ctrl-z": "Undo"
+}

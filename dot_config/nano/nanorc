@@ -2,3 +2,5 @@ set autoindent
 set linenumbers
 set softwrap
 set zap
+
+include "~/.nano/*.nanorc"

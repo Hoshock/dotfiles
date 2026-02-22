@@ -27,6 +27,7 @@
       just-lsp
       lazygit
       mas
+      micro
       nano
       nixd
       nixfmt
