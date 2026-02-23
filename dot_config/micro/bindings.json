@@ -1,5 +1,7 @@
 {
   "Alt-f": "FindLiteral",
+  "Alt-i": "lua:aichat.aiPrompt",
+  "Alt-m": "lua:aichat.cmdAIModel",
   "Alt-p": "CommandMode",
   "Alt-x": "Cut|CutLine",
 
@@ -15,7 +17,7 @@
   "Ctrl-p": "CursorUp",
   // "Ctrl-s": "Save",
   // "Ctrl-v": "Paste",
-  "Ctrl-x": "Quit",
+  "Ctrl-x": "Quit"
   // "Ctrl-y": "Redo",
   // "Ctrl-z": "Undo"
 }

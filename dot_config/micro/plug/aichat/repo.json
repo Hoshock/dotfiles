@@ -1,0 +1,13 @@
+[{
+    "Name": "aichat",
+    "Description": "AI Chat assistant for micro editor",
+    "Website": "",
+    "Tags": ["ai", "chat"],
+    "Versions": [{
+        "Version": "1.0.0",
+        "Url": "",
+        "Require": {
+            "micro": ">=2.0.0"
+        }
+    }]
+}]

@@ -3,5 +3,7 @@
   "eofnewline": true,
   "hltaberrors": true,
   "hltrailingws": true,
-  "rmtrailingws": true
+  "rmtrailingws": true,
+  "softwrap": true,
+  "wordwrap": true
 }

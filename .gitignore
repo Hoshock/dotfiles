@@ -1,4 +1,5 @@
 .ruff_cache
 dot_claude/*
 !dot_claude/settings.json
+!dot_claude/*.sh
 flake.lock

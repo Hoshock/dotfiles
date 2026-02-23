@@ -1,16 +1,20 @@
 {
   "permissions": {
     "allow": [
+      "Bash(find *)",
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git diff*)",
       "Bash(git log*)",
       "Bash(git rev-parse*)",
       "Bash(git status*)",
+      "Bash(ls *)",
+      "Bash(mkdir *)",
       "Bash(pytest *)",
       "Bash(ruff:*)",
       "Bash(source *)",
-      "Bash(ty:*)"
+      "Bash(ty:*)",
+      "Read(~/.claude/skills/*)"
     ]
   },
   "hooks": {
@@ -129,5 +133,9 @@
       }
     ]
   },
-  "language": "Japanese"
+  "language": "Japanese",
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/statusline-command.sh"
+  }
 }

@@ -7,6 +7,8 @@ keybind = cmd+s=text:\x13
 keybind = cmd+x=text:\x1bx
 keybind = cmd+z=text:\x1A
 keybind = cmd+slash=text:\x1b/
+keybind = shift+cmd+i=text:\x1bi
+keybind = shift+cmd+m=text:\x1bm
 keybind = shift+cmd+p=text:\x1bp
 keybind = shift+cmd+z=text:\x19
 
