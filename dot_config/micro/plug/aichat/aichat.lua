@@ -1,4 +1,4 @@
-VERSION = "3.3.0"
+VERSION = "3.5.0"
 
 local micro  = import("micro")
 local config = import("micro/config")
@@ -11,9 +11,11 @@ local currentModel = ""
 local lastDetectedModel = ""
 local LOG_FILE = "/tmp/micro-aichat.log"
 local MODEL_FILE = "/tmp/micro-ai-lastmodel.txt"
+local SAVED_MODEL_FILE = ""  -- set in init()
 local MAX_HISTORY = 5
 local MAX_HISTORY_CHARS = 2000
 local aiRunning = false
+local currentJob = nil
 local HOME = os.getenv("HOME") or ""
 
 local history = {}
@@ -32,14 +34,46 @@ function logFile(msg)
 end
 
 ----------------------------------------------------------------
+-- model persistence
+----------------------------------------------------------------
+function saveModel()
+    pcall(function()
+        local f = io.open(SAVED_MODEL_FILE, "w")
+        if f then
+            f:write(currentModel)
+            f:close()
+        end
+    end)
+    config.SetGlobalOptionNative("aichat.model", getDisplayModel())
+end
+
+function loadModel()
+    pcall(function()
+        local f = io.open(SAVED_MODEL_FILE, "r")
+        if f then
+            local m = f:read("*l")
+            f:close()
+            if m and m ~= "" then
+                currentModel = m
+                logFile("loaded saved model: " .. m)
+            end
+        end
+    end)
+end
+
+----------------------------------------------------------------
 -- init
 ----------------------------------------------------------------
 function init()
     logFile("===== init: VERSION=" .. VERSION .. " =====")
+    SAVED_MODEL_FILE = config.ConfigDir .. "/.aichat-model"
+    config.RegisterCommonOption("aichat", "model", "")
     config.MakeCommand("ai", cmdAI, config.NoComplete)
     config.MakeCommand("aimodel", cmdAIModel, config.NoComplete)
     config.MakeCommand("aiclear", cmdAIClear, config.NoComplete)
+    loadModel()
     readDetectedModel()
+    config.SetGlobalOptionNative("aichat.model", getDisplayModel())
 end
 
 function getDisplayModel()
@@ -177,6 +211,7 @@ end
 function cmdAIModel(bp, args)
     if args ~= nil and #args > 0 then
         currentModel = args[1]
+        saveModel()
         micro.InfoBar():Message("Model: " .. currentModel)
         return
     end
@@ -188,6 +223,7 @@ function cmdAIModel(bp, args)
         output = output:gsub("%s+$", "")
         if output ~= "" then
             currentModel = output
+            saveModel()
             micro.InfoBar():Message("Model: " .. currentModel)
         end
     end
@@ -298,7 +334,7 @@ function runAI(bp, prompt)
         aiRunning = true
         local fullOutput = ""
 
-        shell.JobStart(cmd,
+        currentJob = shell.JobStart(cmd,
             function(chunk)
                 fullOutput = fullOutput .. chunk
                 local p = findPane(true)
@@ -312,7 +348,9 @@ function runAI(bp, prompt)
             end,
             function()
                 aiRunning = false
+                currentJob = nil
                 readDetectedModel()
+                config.SetGlobalOptionNative("aichat.model", getDisplayModel())
                 logFile("ai: done, len=" .. tostring(#fullOutput))
                 local p = findPane(true)
                 if fullOutput ~= "" then
@@ -365,4 +403,20 @@ end
 function modelTag(m)
     if m ~= nil and m ~= "" then return " (" .. m .. ")" end
     return ""
+end
+
+----------------------------------------------------------------
+-- pane close handler
+----------------------------------------------------------------
+function preQuit(bp)
+    if bp.Buf ~= nil and bp.Buf.Path == AI_BUF_PATH then
+        history = {}
+        if currentJob ~= nil and aiRunning then
+            shell.JobStop(currentJob)
+            currentJob = nil
+            aiRunning = false
+            logFile("ai: cancelled by pane close")
+        end
+        logFile("ai: pane closed, history cleared")
+    end
 end

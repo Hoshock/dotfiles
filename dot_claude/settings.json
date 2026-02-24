@@ -1,6 +1,18 @@
 {
   "permissions": {
+    "ask": [
+      "Bash(chezmoi apply*)",
+      "Bash(gh *)",
+      "Bash(git push*)",
+      "Bash(mv *)",
+      "Bash(rm *)",
+      "Bash(source *)"
+    ],
     "allow": [
+      "Bash(bat *)",
+      "Bash(chezmoi diff*)",
+      "Bash(chezmoi managed*)",
+      "Bash(chezmoi status*)",
       "Bash(find *)",
       "Bash(git add *)",
       "Bash(git commit *)",
@@ -12,8 +24,9 @@
       "Bash(mkdir *)",
       "Bash(pytest *)",
       "Bash(ruff:*)",
-      "Bash(source *)",
       "Bash(ty:*)",
+      "Bash(which *)",
+      "Read(~/Projects/dotfiles/*)",
       "Read(~/.claude/skills/*)"
     ]
   },
@@ -128,6 +141,23 @@
             "type": "command",
             "command": "$HOME/.claude/hooks/forward-event.sh",
             "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/format-python.sh",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/format-markdown.sh",
+            "timeout": 10
           }
         ]
       }

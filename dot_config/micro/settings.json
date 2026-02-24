@@ -5,5 +5,6 @@
   "hltrailingws": true,
   "rmtrailingws": true,
   "softwrap": true,
-  "wordwrap": true
+  "wordwrap": true,
+  "statusformatr": "$(opt:aichat.model) | $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help"
 }

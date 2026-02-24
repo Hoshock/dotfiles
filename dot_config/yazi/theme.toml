@@ -1,0 +1,2 @@
+[mgr]
+syntect_theme = "~/.config/bat/themes/github-dark-dimmed.tmTheme"

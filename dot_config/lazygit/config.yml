@@ -2,3 +2,35 @@ promptToReturnFromSubprocess: false
 gui:
   expandFocusedSidePanel: true
   expandedSidePanelWeight: 5
+  nerdFontsVersion: "3"
+  theme:
+    activeBorderColor:
+      - "#539bf5"
+      - bold
+    inactiveBorderColor:
+      - "#444c56"
+    searchingActiveBorderColor:
+      - "#39c5cf"
+      - bold
+    optionsTextColor:
+      - "#539bf5"
+    selectedLineBgColor:
+      - "#2d333b"
+    inactiveViewSelectedLineBgColor:
+      - "#22272e"
+    cherryPickedCommitFgColor:
+      - "#539bf5"
+    cherryPickedCommitBgColor:
+      - "#2d333b"
+    markedBaseCommitFgColor:
+      - "#c69026"
+    markedBaseCommitBgColor:
+      - "#2d333b"
+    unstagedChangesColor:
+      - "#f47067"
+    defaultFgColor:
+      - "#adbac7"
+
+git:
+  pagers:
+    - pager: delta --paging=never --true-color=auto --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --syntax-theme="github-dark-dimmed"
