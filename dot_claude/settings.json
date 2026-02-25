@@ -29,7 +29,9 @@
       "Bash(which *)",
       "Read(~/Projects/dotfiles/*)",
       "Read(~/.claude/skills/*)",
-      "WebSearch"
+      "WebSearch",
+      "mcp__aws-pricing-mcp-server__*",
+      "mcp__context7__*"
     ]
   },
   "hooks": {

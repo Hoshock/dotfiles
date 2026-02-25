@@ -11,6 +11,7 @@
   "Ctrl-d": "Delete",
   "Ctrl-e": "EndOfLine",
   "Ctrl-f": "CursorRight",
+  "Ctrl-k": "SelectToEndOfLine,Cut",
   // "Ctrl-h": "Backspace",
   "Ctrl-n": "CursorDown",
   "Ctrl-o": "Save",
