@@ -6,7 +6,8 @@
       "Bash(git push*)",
       "Bash(mv *)",
       "Bash(rm *)",
-      "Bash(source *)"
+      "Bash(source *)",
+      "WebFetch(*)"
     ],
     "allow": [
       "Bash(bat *)",
@@ -23,11 +24,12 @@
       "Bash(ls *)",
       "Bash(mkdir *)",
       "Bash(pytest *)",
-      "Bash(ruff:*)",
-      "Bash(ty:*)",
+      "Bash(ruff *)",
+      "Bash(ty *)",
       "Bash(which *)",
       "Read(~/Projects/dotfiles/*)",
-      "Read(~/.claude/skills/*)"
+      "Read(~/.claude/skills/*)",
+      "WebSearch"
     ]
   },
   "hooks": {
@@ -151,12 +153,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/format-python.sh",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/format-markdown.sh",
+            "command": "$HOME/.claude/hooks/format.sh",
             "timeout": 10
           }
         ]

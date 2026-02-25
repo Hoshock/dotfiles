@@ -5,6 +5,8 @@
     onActivation.autoUpdate = true;
 
     brews = [
+      "git-delta"
+      "glow"
       "yazi"
     ];
 

@@ -3,6 +3,7 @@
 .gitignore
 .ruff_cache
 flake.lock
+**/LICENSE
 **/README.md
 setup.sh
 install.sh

@@ -1,10 +1,14 @@
-[{
+[
+  {
     "Name": "autoformat",
     "Description": "Auto format on save per filetype",
     "Website": "",
     "Tags": ["format"],
-    "Versions": [{
+    "Versions": [
+      {
         "Version": "1.0.0",
         "Require": { "micro": ">=2.0.0" }
-    }]
-}]
+      }
+    ]
+  }
+]
