@@ -1,13 +1,17 @@
-[{
+[
+  {
     "Name": "aichat",
     "Description": "AI Chat assistant for micro editor",
     "Website": "",
     "Tags": ["ai", "chat"],
-    "Versions": [{
+    "Versions": [
+      {
         "Version": "1.0.0",
         "Url": "",
         "Require": {
-            "micro": ">=2.0.0"
+          "micro": ">=2.0.0"
         }
-    }]
-}]
+      }
+    ]
+  }
+]

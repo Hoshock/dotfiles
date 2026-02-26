@@ -7,11 +7,12 @@
 
     home.packages = with pkgs; [
       awscli2
-      aws-sam-cli
+      # aws-sam-cli
       bat
       chezmoi
       codex
       colima
+      delta
       deno
       direnv
       docker
@@ -44,6 +45,7 @@
       shfmt
       # ssm-session-manager-plugin
       starship
+      stylua
       terminal-notifier
       tldr
       tree

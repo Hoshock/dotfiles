@@ -1,10 +1,13 @@
 {
+  "*.nix.tmpl": {
+    "filetype": "nix"
+  },
   "colorscheme": "github-dark-dimmed",
   "eofnewline": true,
   "hltaberrors": true,
   "hltrailingws": true,
   "rmtrailingws": true,
   "softwrap": true,
-  "wordwrap": true,
-  "statusformatr": "$(opt:aichat.model) | $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help"
+  "statusformatr": "$(opt:aichat.model) | $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
+  "wordwrap": true
 }

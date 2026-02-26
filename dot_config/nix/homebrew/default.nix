@@ -5,8 +5,7 @@
     onActivation.autoUpdate = true;
 
     brews = [
-      "git-delta"
-      "glow"
+      "aws-sam-cli"
       "yazi"
     ];
 

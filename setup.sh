@@ -7,7 +7,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export SHELL_SESSIONS_DISABLE=1
 
 if [[ ! -d "$HOME/Projects" ]]; then
-    mkdir -p "$HOME/Projects"
+	mkdir -p "$HOME/Projects"
 fi
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply --source "$HOME/Projects/dotfiles" https://github.com/Hoshock/dotfiles.git
 rm -rf .local/bin/chezmoi

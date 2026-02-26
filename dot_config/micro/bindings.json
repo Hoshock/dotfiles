@@ -1,5 +1,6 @@
 {
   "Alt-f": "FindLiteral",
+  "Alt-s": "lua:autoformat.formatPick",
   "Alt-i": "lua:aichat.aiPrompt",
   "Alt-m": "lua:aichat.cmdAIModel",
   "Alt-p": "CommandMode",
@@ -11,7 +12,7 @@
   "Ctrl-d": "Delete",
   "Ctrl-e": "EndOfLine",
   "Ctrl-f": "CursorRight",
-  "Ctrl-k": "SelectToEndOfLine,Cut",
+  "Ctrl-k": "lua:initlua.killLine",
   // "Ctrl-h": "Backspace",
   "Ctrl-n": "CursorDown",
   "Ctrl-o": "Save",
