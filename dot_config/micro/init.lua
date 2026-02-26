@@ -1,5 +1,19 @@
+local micro = import("micro")
 local config = import("micro/config")
 local buffer = import("micro/buffer")
+
+local HOME = os.getenv("HOME") or ""
+
+function shortname(buf)
+	if buf == nil then
+		return ""
+	end
+	local path = buf:GetName()
+	if HOME ~= "" and path:sub(1, #HOME) == HOME then
+		return "~" .. path:sub(#HOME + 1)
+	end
+	return path
+end
 
 -- Ctrl-k: kill line or partial line.
 -- At column 0: delete entire line.
@@ -29,6 +43,8 @@ function killLine(bp)
 end
 
 function init()
+	micro.SetStatusInfoFn("initlua.shortname")
+
 	if linter then
 		local wrapper = config.ConfigDir .. "/plug/formatter/cfn-lint-micro.sh"
 		linter.makeLinter(

@@ -8,6 +8,7 @@
   "hltrailingws": true,
   "rmtrailingws": true,
   "softwrap": true,
-  "statusformatr": "$(opt:copilot.model) | $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
+  "statusformatl": "$(initlua.shortname) $(modified)($(line),$(col)) | $(opt:filetype)",
+  "statusformatr": "$(opt:copilot.model)",
   "wordwrap": true
 }

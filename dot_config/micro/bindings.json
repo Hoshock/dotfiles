@@ -1,9 +1,9 @@
 {
   "Alt-f": "FindLiteral",
-  "Alt-s": "lua:formatter.formatPick",
   "Alt-i": "lua:copilot.aiPrompt",
   "Alt-m": "lua:copilot.cmdAIModel",
   "Alt-p": "CommandMode",
+  "Alt-s": "lua:formatter.formatPick",
   "Alt-x": "Cut|CutLine",
 
   "Ctrl-a": "StartOfLine",
