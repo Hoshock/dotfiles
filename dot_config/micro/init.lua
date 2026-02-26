@@ -30,7 +30,7 @@ end
 
 function init()
 	if linter then
-		local wrapper = config.ConfigDir .. "/plug/autoformat/cfn-lint-micro.sh"
+		local wrapper = config.ConfigDir .. "/plug/formatter/cfn-lint-micro.sh"
 		linter.makeLinter(
 			"cfnlint",
 			"yaml",

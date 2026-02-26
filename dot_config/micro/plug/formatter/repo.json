@@ -1,6 +1,6 @@
 [
   {
-    "Name": "autoformat",
+    "Name": "formatter",
     "Description": "Auto format on save per filetype",
     "Website": "",
     "Tags": ["format"],

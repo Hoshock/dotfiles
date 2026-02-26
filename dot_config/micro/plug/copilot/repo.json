@@ -1,0 +1,9 @@
+[
+  {
+    "Name": "copilot",
+    "Description": "GitHub Copilot inline completion and AI chat",
+    "Website": "",
+    "Tags": ["copilot", "lsp", "completion", "ai", "chat"],
+    "Versions": [">=2.0.0-1"]
+  }
+]

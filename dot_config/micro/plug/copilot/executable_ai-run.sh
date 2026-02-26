@@ -3,9 +3,9 @@
 # Usage: ai-run.sh <prompt_file> [model]
 set -uo pipefail
 
-LOG="/tmp/micro-aichat.log"
+LOG="/tmp/micro-copilot-chat.log"
 STDERR_TMP="/tmp/micro-ai-stderr.txt"
-MODEL_FILE="/tmp/micro-ai-lastmodel.txt"
+MODEL_FILE="/tmp/micro-copilot-lastmodel.txt"
 
 PROMPT_FILE="${1:-}"
 MODEL="${2:-}"

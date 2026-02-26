@@ -8,6 +8,6 @@
   "hltrailingws": true,
   "rmtrailingws": true,
   "softwrap": true,
-  "statusformatr": "$(opt:aichat.model) | $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
+  "statusformatr": "$(opt:copilot.model) | $(bind:ToggleKeyMenu): bindings, $(bind:ToggleHelp): help",
   "wordwrap": true
 }
