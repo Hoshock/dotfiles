@@ -6,6 +6,8 @@
 
     brews = [
       "aws-sam-cli"
+      "ffmpeg"
+      "libomp"
       "yazi"
     ];
 
@@ -15,6 +17,7 @@
       "arc"
       "clipy"
       "cmux"
+      "codex"
       "font-hack-nerd-font"
       "font-monaspace"
       "google-chrome"
