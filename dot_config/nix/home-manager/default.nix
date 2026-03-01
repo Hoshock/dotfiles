@@ -10,7 +10,6 @@
       # aws-sam-cli
       bat
       chezmoi
-      codex
       colima
       copilot-language-server
       delta
