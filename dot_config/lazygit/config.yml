@@ -44,7 +44,7 @@ customCommands:
     output: terminal
   - key: "o"
     description: "Review commit(s)"
-    command: "orbit {{.SelectedCommitRange.From}}~1..{{.SelectedCommitRange.To}}"
+    command: "orbit --root {{.SelectedCommitRange.From}}~1..{{.SelectedCommitRange.To}}"
     context: "commits"
     output: terminal
 
