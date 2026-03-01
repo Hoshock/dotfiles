@@ -31,6 +31,23 @@ gui:
     defaultFgColor:
       - "#adbac7"
 
+customCommands:
+  - key: "o"
+    description: "Review uncommitted changes"
+    command: "orbit ."
+    context: "files"
+    output: terminal
+  - key: "o"
+    description: "Review branch diff"
+    command: "orbit {{.SelectedLocalBranch.Name}} {{.CheckedOutBranch.Name}}"
+    context: "localBranches"
+    output: terminal
+  - key: "o"
+    description: "Review commit(s)"
+    command: "orbit {{.SelectedCommitRange.From}}~1..{{.SelectedCommitRange.To}}"
+    context: "commits"
+    output: terminal
+
 git:
   pagers:
     - pager: delta --paging=never --true-color=auto --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --syntax-theme="github-dark-dimmed"
