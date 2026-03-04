@@ -1,0 +1,31 @@
+# orbit custom configuration
+file_tree_initial_width = 0.2
+initial_view = "split"
+
+[keybindings.file-tree]
+quit = "q"
+tree_shrink = "["
+tree_grow = "]"
+comment_list = "c"
+prompt_preview = "p"
+toggle_view_mode = "t"
+toggle_viewed = "v"
+
+[keybindings.diff-view]
+quit = "q"
+comment = "c"
+delete_comment = "d"
+edit_comment = "e"
+file_comment = "f"
+toggle_view_mode = "t"
+toggle_viewed = "v"
+fold = "z"
+
+[keybindings.comment-list]
+quit = "q"
+delete_comment = "d"
+edit_comment = "e"
+
+[keybindings.prompt-preview]
+quit = "q"
+copy_prompt = "y"

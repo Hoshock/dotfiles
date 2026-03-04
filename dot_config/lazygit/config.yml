@@ -33,8 +33,13 @@ gui:
 
 customCommands:
   - key: "o"
-    description: "Review uncommitted changes"
+    description: "Review working tree diff"
     command: "orbit ."
+    context: "files"
+    output: terminal
+  - key: "O"
+    description: "Review working tree diff (include untracked)"
+    command: "orbit --include-untracked ."
     context: "files"
     output: terminal
   - key: "o"

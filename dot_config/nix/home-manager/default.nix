@@ -1,4 +1,10 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  nodejsPkg,
+  pnpmPkg,
+  ...
+}:
 {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
@@ -32,8 +38,9 @@
       nano
       nixd
       nixfmt
-      nodejs_24
+      nodejsPkg
       nodePackages.aws-cdk
+      pnpmPkg
       prettier
       python313Packages.cfn-lint
       python313Packages.httpie
@@ -54,7 +61,6 @@
       wget
       xdg-ninja
       yq-go
-      zenn-cli
       zoxide
     ];
   };

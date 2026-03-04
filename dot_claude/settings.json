@@ -1,6 +1,5 @@
 {
   "permissions": {
-    "ask": ["Bash(git push*)", "Bash(rm *)", "WebFetch(*)"],
     "allow": [
       "Bash(bat *)",
       "Bash(chezmoi diff*)",
@@ -24,6 +23,11 @@
       "WebSearch",
       "mcp__aws-pricing-mcp-server__*",
       "mcp__context7__*"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(rm *)",
+      "WebFetch(*)"
     ]
   },
   "hooks": {
@@ -73,9 +77,9 @@
       }
     ]
   },
-  "language": "Japanese",
   "statusLine": {
     "type": "command",
     "command": "$HOME/.claude/statusline-command.sh"
-  }
+  },
+  "language": "Japanese"
 }
