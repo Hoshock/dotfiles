@@ -10,5 +10,5 @@
   "softwrap": true,
   "statusformatl": "$(initlua.shortname) $(modified)($(line),$(col)) | $(opt:filetype)",
   "statusformatr": "$(opt:copilot.model)",
-  "wordwrap": true
+  "wordwrap": false
 }
