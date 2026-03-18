@@ -272,6 +272,8 @@
     "TC",
   ],
   "ruff.lint.select": ["ALL"],
+  "ty.inlayHints.callArgumentNames": false,
+  "ty.inlayHints.variableTypes": false,
 
   // shellscript
   "[shellscript]": {

@@ -27,7 +27,7 @@ prune:
 
       git -C "${GIT_DIR}" fetch --all --prune
 
-      MERGED=$(git -C "${GIT_DIR}" branch --merged=main | grep -v main | grep -v '\*' || true)
+      MERGED=$(git -C "${GIT_DIR}" branch --merged=main | grep -v main | grep -v '[*+]' || true)
       if [ -n "${MERGED}" ]; then
         echo "${MERGED}" | while read -r branch; do
           branch=$(echo "${branch}" | xargs)
@@ -42,26 +42,30 @@ prune:
     else
       git fetch --all --prune
 
-      MERGED=$(git branch --merged=main | grep -v main | grep -v '\*' || true)
+      MERGED=$(git branch --merged=main | grep -v main | grep -v '[*+]' || true)
       if [ -n "${MERGED}" ]; then
         echo "${MERGED}" | xargs git branch -d
       fi
     fi
 
-# Clone repository as bare with worktree structure
+# Clone repository (mode: normal or worktree)
 [group('git')]
-clone owner repo:
+clone owner repo mode="normal":
     #!/usr/bin/env bash
     set -euo pipefail
 
     BASE_DIR="{{ projects }}/{{ repo }}"
-    mkdir -p "${BASE_DIR}"
 
-    git clone --bare --single-branch --branch main "https://github.com/{{ owner }}/{{ repo }}.git" "${BASE_DIR}/repo.git"
-    git -C "${BASE_DIR}/repo.git" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-    git -C "${BASE_DIR}/repo.git" fetch origin
-    git -C "${BASE_DIR}/repo.git" worktree add ../main
-    git -C "${BASE_DIR}/main" branch --set-upstream-to=origin/main main
+    if [ "{{ mode }}" = "worktree" ]; then
+      mkdir -p "${BASE_DIR}"
+      git clone --bare --single-branch --branch main "https://github.com/{{ owner }}/{{ repo }}.git" "${BASE_DIR}/repo.git"
+      git -C "${BASE_DIR}/repo.git" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+      git -C "${BASE_DIR}/repo.git" fetch origin
+      git -C "${BASE_DIR}/repo.git" worktree add ../main
+      git -C "${BASE_DIR}/main" branch --set-upstream-to=origin/main main
+    else
+      git clone "https://github.com/{{ owner }}/{{ repo }}.git" "${BASE_DIR}"
+    fi
 
 # Find the base directory of the git worktree
 [group('git')]

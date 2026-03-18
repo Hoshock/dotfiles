@@ -27,3 +27,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
 export PATH="$HOME/.local/bin:$PATH"
+
+claude() {
+  if scutil --dns 2>/dev/null | grep -q "wni.co.jp"; then
+    command just -g claude "$@"
+  else
+    command claude "$@"
+  fi
+}

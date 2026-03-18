@@ -81,5 +81,7 @@
     "type": "command",
     "command": "$HOME/.claude/statusline-command.sh"
   },
-  "language": "Japanese"
+  "language": "Japanese",
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }
