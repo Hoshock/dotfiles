@@ -30,7 +30,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 claude() {
   if scutil --dns 2>/dev/null | grep -q "wni.co.jp"; then
-    command just -g claude "$@"
+    NODE_EXTRA_CA_CERTS="$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer" command claude "$@"
   else
     command claude "$@"
   fi

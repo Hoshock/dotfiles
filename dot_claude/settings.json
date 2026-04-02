@@ -81,7 +81,11 @@
     "type": "command",
     "command": "$HOME/.claude/statusline-command.sh"
   },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
   "language": "Japanese",
-  "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "skipAutoPermissionPrompt": true
 }

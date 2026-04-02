@@ -178,14 +178,26 @@ update flag="partial":
 #            Claude
 # ================================
 
-# Run Claude with custom CA certificate
+# Run Claude in a worktree for reviewing a remote branch
 [group('claude')]
-claude *args:
+claude-rev branch *args:
     #!/usr/bin/env bash
     set -euo pipefail
 
     cd {{ invocation_directory() }}
-    NODE_EXTRA_CA_CERTS=${HOME}/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer claude {{ args }}
+    WORKTREE_NAME=$(echo "{{ branch }}" | tr '/' '-')
+    WORKTREE_DIR=".claude/worktrees/${WORKTREE_NAME}"
+
+    if [ ! -d "${WORKTREE_DIR}" ]; then
+      git worktree add "${WORKTREE_DIR}" "{{ branch }}"
+    fi
+
+    cd "${WORKTREE_DIR}"
+    if scutil --dns 2>/dev/null | grep -q "wni.co.jp"; then
+      NODE_EXTRA_CA_CERTS="$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer" claude {{ args }}
+    else
+      claude {{ args }}
+    fi
 
 # ================================
 #            Python
