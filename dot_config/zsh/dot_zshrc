@@ -35,3 +35,6 @@ claude() {
     command claude "$@"
   fi
 }
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
