@@ -95,5 +95,8 @@
   "language": "Japanese",
   "voiceEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "cleanupPeriodDays": 180
+  "cleanupPeriodDays": 180,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
 }
