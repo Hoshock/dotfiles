@@ -24,11 +24,7 @@
       "mcp__aws-pricing-mcp-server__*",
       "mcp__context7__*"
     ],
-    "ask": [
-      "Bash(git push*)",
-      "Bash(rm *)",
-      "WebFetch(*)"
-    ]
+    "ask": ["Bash(git push*)", "Bash(rm *)", "WebFetch(*)"]
   },
   "hooks": {
     "Notification": [
@@ -84,7 +80,9 @@
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
-    "ncpd@ncpd-claude-code-marketplace": true
+    "ncpd@ncpd-claude-code-marketplace": true,
+    "frontend-design@claude-plugins-official": true,
+    "hoshock@ncpd-claude-code-marketplace": true
   },
   "extraKnownMarketplaces": {
     "ncpd-claude-code-marketplace": {
@@ -96,5 +94,6 @@
   },
   "language": "Japanese",
   "voiceEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "cleanupPeriodDays": 180
 }

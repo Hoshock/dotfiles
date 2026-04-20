@@ -38,3 +38,14 @@ claude() {
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
+
+# Playwright browsers
+export PLAYWRIGHT_BROWSERS_PATH="$XDG_DATA_HOME/ms-playwright"
+
+# pnpm
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
