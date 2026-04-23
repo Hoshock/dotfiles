@@ -1,3 +1,6 @@
+# # Kiro CLI pre block. Keep at the top of this file.
+# [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 
 eval "$(sheldon source)"
@@ -29,11 +32,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 claude() {
-  if scutil --dns 2>/dev/null | grep -q "wni.co.jp"; then
-    NODE_EXTRA_CA_CERTS="$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer" command claude "$@"
-  else
-    command claude "$@"
-  fi
+    if scutil --dns 2>/dev/null | grep -q "wni.co.jp"; then
+        NODE_EXTRA_CA_CERTS="$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer" command claude "$@"
+    else
+        command claude "$@"
+    fi
 }
 
 # Vite+ bin (https://viteplus.dev)
@@ -45,7 +48,10 @@ export PLAYWRIGHT_BROWSERS_PATH="$XDG_DATA_HOME/ms-playwright"
 # pnpm
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# # Kiro CLI post block. Keep at the bottom of this file.
+# [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
