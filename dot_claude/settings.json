@@ -96,16 +96,17 @@
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
-    "ncpd@ncpd-claude-code-marketplace": true,
+    "ncpd@wni-claude-code-marketplace": true,
     "frontend-design@claude-plugins-official": true,
-    "hoshock@ncpd-claude-code-marketplace": true
+    "hoshock@wni-claude-code-marketplace": true
   },
   "extraKnownMarketplaces": {
-    "ncpd-claude-code-marketplace": {
+    "wni-claude-code-marketplace": {
       "source": {
         "source": "git",
-        "url": "https://github.com/weathernews/NCPD-Claude-Code-Marketplace.git"
-      }
+        "url": "https://github.com/weathernews/WNI-Claude-Code-Marketplace.git"
+      },
+      "autoUpdate": true
     }
   },
   "language": "Japanese",
