@@ -1,5 +1,10 @@
 { username, homedir, ... }:
 {
+  nix.settings.trusted-users = [
+    "root"
+    username
+  ];
+
   system = {
     stateVersion = 6;
     primaryUser = username;

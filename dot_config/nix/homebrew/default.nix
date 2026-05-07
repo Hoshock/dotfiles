@@ -7,7 +7,11 @@
     brews = [
       "aws-sam-cli"
       "ffmpeg"
+      "ghq"
       "libomp"
+      "microsoft/apm/apm"
+      "poppler"
+      "xcodegen"
       "yazi"
     ];
 
@@ -16,14 +20,17 @@
       "aqua-voice"
       "arc"
       "clipy"
-      "cmux"
       "codex"
       "font-hack-nerd-font"
       "font-monaspace"
       "google-chrome"
       "google-japanese-ime"
       "karabiner-elements"
+      "kiro"
+      "kiro-cli"
+      "manaflow-ai/cmux/cmux"
       "qlmarkdown"
+      "session-manager-plugin"
       "slack"
       "syntax-highlight"
       "thebrowsercompany-dia"
@@ -31,18 +38,23 @@
       "zoom"
     ];
 
-    # masApps = {
-    #   "Stay" = 435410196;
-    #   "Window Tidy" = 456609775;
-    # };
+    masApps = {
+      # "Stay" = 435410196;
+      # "Window Tidy" = 456609775;
+      # "Xcode" = 497799835;
+    };
 
     extraConfig = ''
+      # vscode "amazonwebservices.amazon-q-vscode"
       vscode "formulahendry.auto-rename-tag"
       vscode "njpwerner.autodocstring"
+      # vscode "amazonwebservices.aws-toolkit-vscode"
+      # vscode "ms-vscode.azure-repos"
       vscode "aaron-bond.better-comments"
       vscode "biomejs.biome"
       vscode "kddejong.vscode-cfn-lint"
       vscode "openai.chatgpt"
+      # vscode "anthropic.claude-code"
       vscode "vivaxy.vscode-conventional-commits"
       vscode "pranaygp.vscode-css-peek"
       vscode "ms-toolsai.datawrangler"
@@ -70,6 +82,7 @@
       vscode "ms-toolsai.vscode-jupyter-slideshow"
       vscode "ms-vscode.live-server"
       vscode "ritwickdey.LiveServer"
+      # vscode "marimo-team.vscode-marimo"
       vscode "yzhang.markdown-all-in-one"
       vscode "bierner.markdown-mermaid"
       vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
@@ -77,7 +90,7 @@
       vscode "PKief.material-icon-theme"
       vscode "jnoortheen.nix-ide"
       vscode "Nuxtr.nuxtr-vscode"
-      vscode "42Crunch.vscode-openapi"
+      # vscode "42Crunch.vscode-openapi"
       vscode "oxc.oxc-vscode"
       vscode "johnpapa.vscode-peacock"
       vscode "esbenp.prettier-vscode"
@@ -85,7 +98,9 @@
       # vscode "ms-python.vscode-pylance"
       vscode "ms-python.python"
       vscode "ms-python.debugpy"
+      # vscode "ms-python.vscode-python-envs"
       vscode "mechatroner.rainbow-csv"
+      # vscode "ms-vscode-remote.remote-containers"
       vscode "ms-vscode-remote.remote-ssh"
       vscode "ms-vscode-remote.remote-ssh-edit"
       vscode "ms-vscode.remote-explorer"
@@ -102,6 +117,7 @@
       vscode "Vue.volar"
       vscode "CelianRiboulet.webvalidator"
       vscode "nefrob.vscode-just-syntax"
+      # vscode "redhat.vscode-yaml"
       vscode "mosapride.zenkaku"
     '';
   };

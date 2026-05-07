@@ -53,5 +53,30 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# ghq + fzf: fuzzy-jump to a local repository.
+# `ghq list` is ~500ms on this machine, which fzf renders as a spinner.
+# Cache the output so the picker opens instantly; refresh in the background.
+# Uses `ghq list` (root-relative) instead of `-p`, so the picker shows
+# `repo` instead of the full `~/Projects/...` path.
+GHQ_ROOT="$HOME/Projects"
+GHQ_LIST_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/ghq-list"
+function _ghq-list-refresh() {
+    mkdir -p "${GHQ_LIST_CACHE:h}"
+    ghq list >"${GHQ_LIST_CACHE}.tmp" 2>/dev/null && mv "${GHQ_LIST_CACHE}.tmp" "$GHQ_LIST_CACHE"
+}
+function fzf-ghq-cd() {
+    [[ -s "$GHQ_LIST_CACHE" ]] || _ghq-list-refresh
+    local rel full
+    rel=$(fzf --reverse --height=40% --preview "eza -T --level=2 --color=always ${GHQ_ROOT}/{} 2>/dev/null || ls ${GHQ_ROOT}/{}" <"$GHQ_LIST_CACHE") || { ( _ghq-list-refresh & ) >/dev/null 2>&1; return }
+    full="${GHQ_ROOT}/${rel}"
+    BUFFER="cd ${(q)full}"
+    zle accept-line
+    ( _ghq-list-refresh & ) >/dev/null 2>&1
+}
+zle -N fzf-ghq-cd
+# Defer so this binding wins over history-search-multi-word (also deferred).
+zsh-defer bindkey '^R' fzf-ghq-cd
+zsh-defer _ghq-list-refresh
+
 # # Kiro CLI post block. Keep at the bottom of this file.
 # [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"

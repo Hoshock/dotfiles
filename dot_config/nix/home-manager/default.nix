@@ -12,8 +12,8 @@
     home.stateVersion = "25.11";
 
     home.packages = with pkgs; [
+      aws-cdk-cli
       awscli2
-      # aws-sam-cli
       bat
       chezmoi
       colima
@@ -39,7 +39,6 @@
       nixd
       nixfmt
       nodejsPkg
-      nodePackages.aws-cdk
       pnpmPkg
       prettier
       python313Packages.cfn-lint
@@ -50,7 +49,6 @@
       sheldon
       shellcheck
       shfmt
-      # ssm-session-manager-plugin
       starship
       stylua
       terminal-notifier
