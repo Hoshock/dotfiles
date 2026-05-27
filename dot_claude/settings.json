@@ -1,7 +1,8 @@
 {
   "cleanupPeriodDays": 180,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
   },
   "permissions": {
     "allow": [
@@ -108,7 +109,8 @@
     "swift-lsp@claude-plugins-official": true,
     "ncpd@wni-claude-code-marketplace": true,
     "frontend-design@claude-plugins-official": true,
-    "hoshock@wni-claude-code-marketplace": true
+    "hoshock@wni-claude-code-marketplace": true,
+    "aws-transform@agent-plugins-for-aws": true
   },
   "extraKnownMarketplaces": {
     "wni-claude-code-marketplace": {
@@ -117,9 +119,15 @@
         "url": "https://github.com/weathernews/WNI-Claude-Code-Marketplace.git"
       },
       "autoUpdate": true
+    },
+    "agent-plugins-for-aws": {
+      "source": {
+        "source": "github",
+        "repo": "awslabs/agent-plugins"
+      }
     }
   },
   "language": "Japanese",
-  "voiceEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }

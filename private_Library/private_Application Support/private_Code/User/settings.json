@@ -71,7 +71,6 @@
   // front-end
   "biome.enabled": false,
   "oxc.enable": false,
-  "typescript.updateImportsOnFileMove.enabled": "always",
 
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -98,8 +97,8 @@
     "editor.defaultFormatter": "biomejs.biome",
     "editor.tabSize": 2,
   },
-  "javascript.validate.enable": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "js/ts.validate.enabled": false,
 
   // git/github
   "chat.agent.enabled": true,
@@ -160,8 +159,6 @@
       "text": "IMPORTANT: Add gitmoji after the colon of commit type.",
     },
   ],
-  "github.copilot.chat.editor.temporalContext.enabled": true,
-  "github.copilot.chat.edits.temporalContext.enabled": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -258,22 +255,6 @@
     "--no-cov",
     "--cov-config=${workspaceFolder:root}/pyproject.toml",
   ],
-  "ruff.lineLength": 120,
-  "ruff.lint.ignore": [
-    "ANN401",
-    "BLE",
-    "D",
-    "E501",
-    "EM",
-    "PD002",
-    "PD901",
-    "PLC01",
-    "PLR09",
-    "PLR2004",
-    "PTH123",
-    "TC",
-  ],
-  "ruff.lint.select": ["ALL"],
   "ty.inlayHints.callArgumentNames": false,
   "ty.inlayHints.variableTypes": false,
 
@@ -340,4 +321,5 @@
       "value": "#FFFFFF",
     },
   ],
+  "chat.mcp.gallery.enabled": true,
 }
