@@ -29,7 +29,11 @@
       "mcp__aws-pricing-mcp-server__*",
       "mcp__context7__*"
     ],
-    "ask": ["Bash(git push*)", "Bash(rm *)", "WebFetch(*)"]
+    "ask": [
+      "Bash(git push*)",
+      "Bash(rm *)",
+      "WebFetch(*)"
+    ]
   },
   "hooks": {
     "Notification": [
@@ -129,5 +133,6 @@
   },
   "language": "Japanese",
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "tui": "fullscreen"
 }
