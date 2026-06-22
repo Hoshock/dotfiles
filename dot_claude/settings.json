@@ -89,6 +89,11 @@
             "type": "command",
             "command": "$HOME/.claude/hooks/chezmoi-guard.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/protect-aws-config.sh",
+            "timeout": 10
           }
         ]
       },
@@ -99,6 +104,16 @@
             "type": "command",
             "command": "$HOME/.claude/hooks/block-uv-run-pytest.sh",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/enforce-aws-readonly-profile.sh",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/protect-aws-config.sh",
+            "timeout": 10
           }
         ]
       }
@@ -132,7 +147,8 @@
     }
   },
   "language": "Japanese",
+  "tui": "fullscreen",
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
-  "tui": "fullscreen"
+  "skipWorkflowUsageWarning": true
 }
