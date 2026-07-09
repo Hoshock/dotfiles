@@ -1,8 +1,7 @@
 {
   "cleanupPeriodDays": 180,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
     "allow": [
@@ -35,6 +34,7 @@
       "WebFetch(*)"
     ]
   },
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -126,7 +126,6 @@
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
-    "ncpd@wni-claude-code-marketplace": true,
     "frontend-design@claude-plugins-official": true,
     "hoshock@wni-claude-code-marketplace": true,
     "aws-transform@agent-plugins-for-aws": true
@@ -148,7 +147,7 @@
   },
   "language": "Japanese",
   "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true,
-  "skipWorkflowUsageWarning": true
+  "voiceEnabled": true
 }
