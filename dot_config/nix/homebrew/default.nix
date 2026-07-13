@@ -20,7 +20,6 @@
       "aqua-voice"
       "arc"
       "clipy"
-      "codex"
       "font-hack-nerd-font"
       "font-monaspace"
       "google-chrome"
