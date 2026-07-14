@@ -28,11 +28,7 @@
       "mcp__aws-pricing-mcp-server__*",
       "mcp__context7__*"
     ],
-    "ask": [
-      "Bash(git push*)",
-      "Bash(rm *)",
-      "WebFetch(*)"
-    ]
+    "ask": ["Bash(git push*)", "Bash(rm *)", "WebFetch(*)"]
   },
   "model": "sonnet",
   "hooks": {
@@ -102,11 +98,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/block-uv-run-pytest.sh",
-            "timeout": 5
-          },
-          {
-            "type": "command",
             "command": "$HOME/.claude/hooks/enforce-aws-readonly-profile.sh",
             "timeout": 10
           },
@@ -128,7 +119,8 @@
     "swift-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "hoshock@wni-claude-code-marketplace": true,
-    "aws-transform@agent-plugins-for-aws": true
+    "aws-transform@agent-plugins-for-aws": true,
+    "feature-dev@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "wni-claude-code-marketplace": {
