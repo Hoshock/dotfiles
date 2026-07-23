@@ -4,6 +4,13 @@ input=$(cat)
 # Model name
 model=$(echo "$input" | jq -r '.model.display_name // empty')
 
+# API mode (LiteLLM via ANTHROPIC_BASE_URL) vs Team subscription mode
+if [ -n "$ANTHROPIC_BASE_URL" ]; then
+    mode="API"
+else
+    mode="Team"
+fi
+
 # Context remaining
 remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
 if [ -n "$remaining" ]; then
@@ -34,7 +41,7 @@ fi
 # Output
 output="$context"
 if [ -n "$model" ]; then
-    output="$model | $output"
+    output="$model ($mode) | $output"
 fi
 if [ -n "$repo_info" ]; then
     output="$repo_info | $output"
