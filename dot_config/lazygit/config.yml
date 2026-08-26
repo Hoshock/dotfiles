@@ -30,7 +30,6 @@ gui:
       - "#f47067"
     defaultFgColor:
       - "#adbac7"
-
 customCommands:
   - key: "o"
     description: "Review working tree diff"
@@ -52,7 +51,6 @@ customCommands:
     command: "orbit --root {{.SelectedCommitRange.From}}~1..{{.SelectedCommitRange.To}}"
     context: "commits"
     output: terminal
-
 git:
-  pagers:
-    - pager: delta --paging=never --true-color=auto --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --syntax-theme="github-dark-dimmed"
+  diffRenderers:
+    - command: delta --paging=never --true-color=auto --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" --syntax-theme="github-dark-dimmed"

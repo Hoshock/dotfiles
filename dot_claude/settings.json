@@ -30,9 +30,7 @@
       "mcp__aws-pricing-mcp-server__*",
       "mcp__context7__*"
     ],
-    "ask": [
-      "Bash(rm *)"
-    ]
+    "ask": ["Bash(rm *)"]
   },
   "model": "sonnet",
   "hooks": {
