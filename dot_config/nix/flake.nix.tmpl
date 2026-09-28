@@ -27,7 +27,7 @@
         config.allowUnfree = true;
       };
       nodejsPkg = pkgs.nodejs_24;
-      pnpmPkg = pkgs.pnpm.override { nodejs = nodejsPkg; };
+      pnpmPkg = pkgs.pnpm;
 
       hostname = "{{ .chezmoi.hostname }}";
       username = "{{ .chezmoi.username }}";
