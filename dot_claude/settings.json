@@ -120,14 +120,13 @@
   },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": false,
     "frontend-design@claude-plugins-official": true,
     "hoshock@wni-claude-code-marketplace": true,
-    "aws-transform@agent-plugins-for-aws": true,
-    "feature-dev@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": false,
+    "claude-md-management@claude-plugins-official": false,
     "ncpd@wni-claude-code-marketplace": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": false
   },
   "extraKnownMarketplaces": {
     "wni-claude-code-marketplace": {
@@ -136,18 +135,15 @@
         "url": "https://github.com/weathernews/WNI-Claude-Code-Marketplace.git"
       },
       "autoUpdate": true
-    },
-    "agent-plugins-for-aws": {
-      "source": {
-        "source": "github",
-        "repo": "awslabs/agent-plugins"
-      }
     }
   },
   "language": "Japanese",
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "medium"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
     }
   },
   "tui": "fullscreen",

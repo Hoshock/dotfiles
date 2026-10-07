@@ -8,6 +8,8 @@
       "aws-sam-cli"
       "ffmpeg"
       "ghq"
+      "hunk"
+      "jj"
       "libomp"
       "microsoft/apm/apm"
       "poppler"
