@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "type": "command",
+        "matcher": "Write|Edit|create|edit",
+        "bash": "$HOME/.copilot/hooks/format.sh",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

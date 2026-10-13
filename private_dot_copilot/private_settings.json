@@ -1,0 +1,8 @@
+{
+  "experimental": true,
+  "defaultMode": "interactive",
+  "defaultPermissionMode": "assisted",
+  "model": "gemini-3.8-flash",
+  "effortLevel": "medium",
+  "contextTier": "long_context"
+}
