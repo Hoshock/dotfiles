@@ -5,10 +5,12 @@ continuation_prompt = '[❯❯ ](bold fg:blue)'
 
 format = """
 ${custom.repo_git}\
+${custom.repo_jj}\
 ${custom.repo_nogit}\
 $directory\
 $git_branch\
 $git_status\
+${custom.branch_jj}\
 ${custom.branch_nogit}\
 $time\
 [ ](fg:color_bg1)\
@@ -37,18 +39,39 @@ case "$PWD" in
 esac
 '''
 when = "git rev-parse --is-inside-work-tree 2>/dev/null"
-format = '[](color_orange)[ 󰊢 $output ](bg:color_orange fg:color_fg0)[](bg:color_yellow fg:color_orange)'
+format = '[](color_orange)[󰊢 $output ](bg:color_orange fg:color_fg0)[](bg:color_yellow fg:color_orange)'
 
-# Orange bar placeholder (non-git only)
+# Jujutsu repository name (.jj only, no .git)
+[custom.repo_jj]
+command = '''
+case "$PWD" in
+  "$HOME/Projects/"*) printf '%s' "${PWD#$HOME/Projects/}" | cut -d/ -f1 ;;
+  *) basename "$(jj root --ignore-working-copy 2>/dev/null)" ;;
+esac
+'''
+when = "! git rev-parse --is-inside-work-tree 2>/dev/null && jj root --ignore-working-copy >/dev/null 2>&1"
+format = '[](color_orange)[󱗆 $output ](bg:color_orange fg:color_fg0)[](bg:color_yellow fg:color_orange)'
+
+# Orange bar placeholder (neither git nor jj)
 [custom.repo_nogit]
 command = "echo 1"
-when = "! git rev-parse --is-inside-work-tree 2>/dev/null"
+when = "! git rev-parse --is-inside-work-tree 2>/dev/null && ! jj root --ignore-working-copy >/dev/null 2>&1"
 format = '[](color_orange)[ ](bg:color_orange fg:color_fg0)[](bg:color_yellow fg:color_orange)'
 
-# Blank branch segment (non-git only)
+# Jujutsu bookmark (nearest ancestor), falling back to the change id
+[custom.branch_jj]
+command = '''
+b=$(jj log --ignore-working-copy --no-graph --color never -n1 -r 'heads(::@ & bookmarks())' -T 'bookmarks.map(|b| b.name()).join(" ")' 2>/dev/null)
+[ -n "$b" ] || b=$(jj log --ignore-working-copy --no-graph --color never -r @ -T 'change_id.shortest(8)' 2>/dev/null)
+printf '%s' "$b"
+'''
+when = "! git rev-parse --is-inside-work-tree 2>/dev/null && jj root --ignore-working-copy >/dev/null 2>&1"
+format = "[](fg:color_yellow bg:color_aqua)[  $output ](bg:color_aqua fg:color_fg0)[](fg:color_aqua bg:color_bg1)"
+
+# Blank branch segment (neither git nor jj)
 [custom.branch_nogit]
 command = "echo 1"
-when = "! git rev-parse --is-inside-work-tree 2>/dev/null"
+when = "! git rev-parse --is-inside-work-tree 2>/dev/null && ! jj root --ignore-working-copy >/dev/null 2>&1"
 format = "[](fg:color_yellow bg:color_aqua)[ ](bg:color_aqua fg:color_fg0)[](fg:color_aqua bg:color_bg1)"
 
 [directory]
