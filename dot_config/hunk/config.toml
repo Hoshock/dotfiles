@@ -1,5 +1,5 @@
 watch = true
-theme = "terminal"
+theme = "hoshock-md"
 mode = "unified"
 line_numbers = true
 wrap_lines = false
@@ -8,3 +8,11 @@ menu_bar = true
 agent_notes = true
 copy_decorations = false
 cursor_line = "row"
+
+[keybindings]
+"hunk.view.openThemeSelector" = false
+
+[themes.hoshock-md]
+base = "github-dark-dimmed"
+label = "Hoshock Markdown"
+selectedHunk = "#2d333a"
