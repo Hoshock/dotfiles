@@ -107,6 +107,11 @@
           },
           {
             "type": "command",
+            "command": "$HOME/.claude/hooks/redirect-rm-to-trash.sh",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "$HOME/.claude/hooks/protect-aws-config.sh",
             "timeout": 10
           }
@@ -144,7 +149,7 @@
       "effortLevel": "medium"
     },
     "claude-sonnet-5-5": {
-      "effortLevel": "high"
+      "effortLevel": "medium"
     }
   },
   "tui": "fullscreen",

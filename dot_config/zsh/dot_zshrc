@@ -62,7 +62,14 @@ GHQ_ROOT="$HOME/Projects"
 GHQ_LIST_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/ghq-list"
 function _ghq-list-refresh() {
     mkdir -p "${GHQ_LIST_CACHE:h}"
-    ghq list >"${GHQ_LIST_CACHE}.tmp" 2>/dev/null && mv "${GHQ_LIST_CACHE}.tmp" "$GHQ_LIST_CACHE"
+    # ghq only sees `.git`; add non-colocated jj repos (`.jj` without `.git`).
+    {
+        ghq list
+        find "$GHQ_ROOT" -maxdepth 4 -name .jj -type d -prune 2>/dev/null |
+            while read -r d; do
+                [[ -e "${d:h}/.git" ]] || print -r -- "${${d:h}#${GHQ_ROOT}/}"
+            done
+    } 2>/dev/null | sort -u >"${GHQ_LIST_CACHE}.tmp" && mv "${GHQ_LIST_CACHE}.tmp" "$GHQ_LIST_CACHE"
 }
 function fzf-ghq-cd() {
     [[ -s "$GHQ_LIST_CACHE" ]] || _ghq-list-refresh
