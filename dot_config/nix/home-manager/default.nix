@@ -43,6 +43,7 @@
       prettier
       python313Packages.cfn-lint
       python313Packages.httpie
+      rain
       reviewdog
       ripgrep
       ruff
@@ -57,6 +58,7 @@
       ty
       uv
       wget
+      wrangler
       xdg-ninja
       yq-go
       zoxide
