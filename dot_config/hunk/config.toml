@@ -9,6 +9,9 @@ agent_notes = true
 copy_decorations = false
 cursor_line = "row"
 
+[extensions]
+paths = ["~/Projects/Hoshock-Hunk-Extensions"]
+
 [keybindings]
 "hunk.view.openThemeSelector" = false
 

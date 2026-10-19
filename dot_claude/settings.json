@@ -123,6 +123,10 @@
     "type": "command",
     "command": "$HOME/.claude/statusline-command.sh"
   },
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/subagent-statusline.sh"
+  },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": false,
