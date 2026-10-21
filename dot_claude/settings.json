@@ -4,35 +4,7 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "allow": [
-      "Bash(bat *)",
-      "Bash(chezmoi diff*)",
-      "Bash(chezmoi managed*)",
-      "Bash(chezmoi status*)",
-      "Bash(find *)",
-      "Bash(git add *)",
-      "Bash(git commit *)",
-      "Bash(git diff*)",
-      "Bash(git log*)",
-      "Bash(git push)",
-      "Bash(git rev-parse*)",
-      "Bash(git status*)",
-      "Bash(ls *)",
-      "Bash(mkdir *)",
-      "Bash(pytest *)",
-      "Bash(ruff *)",
-      "Bash(ty *)",
-      "Bash(which *)",
-      "Read(~/Projects/dotfiles/*)",
-      "Read(~/.claude/skills/*)",
-      "WebFetch",
-      "WebSearch",
-      "mcp__aws-pricing-mcp-server__*",
-      "mcp__context7__*"
-    ],
-    "ask": [
-      "Bash(rm *)"
-    ]
+    "deny": ["Bash(*empty*trash*)", "Bash(*trash*empty*)", "Bash(*.Trash*)"]
   },
   "model": "sonnet",
   "hooks": {
@@ -136,7 +108,8 @@
     "claude-md-management@claude-plugins-official": false,
     "ncpd@wni-claude-code-marketplace": true,
     "code-review@claude-plugins-official": false,
-    "claude-security@claude-plugins-official": true
+    "claude-security@claude-plugins-official": true,
+    "security-guidance@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "wni-claude-code-marketplace": {
@@ -154,6 +127,9 @@
     },
     "claude-sonnet-5-5": {
       "effortLevel": "medium"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
     }
   },
   "tui": "fullscreen",
