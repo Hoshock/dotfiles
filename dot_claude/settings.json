@@ -3,9 +3,6 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "permissions": {
-    "deny": ["Bash(*empty*trash*)", "Bash(*trash*empty*)", "Bash(*.Trash*)"]
-  },
   "model": "sonnet",
   "hooks": {
     "Notification": [
@@ -80,6 +77,11 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/redirect-rm-to-trash.sh",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/block-empty-trash.sh",
             "timeout": 10
           },
           {
