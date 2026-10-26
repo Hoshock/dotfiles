@@ -77,7 +77,7 @@
       vscode "ms-toolsai.jupyter-renderers"
       vscode "ms-toolsai.vscode-jupyter-slideshow"
       vscode "ms-vscode.live-server"
-      vscode "ritwickdey.LiveServer"
+      # vscode "ritwickdey.LiveServer"
       # vscode "marimo-team.vscode-marimo"
       vscode "yzhang.markdown-all-in-one"
       vscode "bierner.markdown-mermaid"
