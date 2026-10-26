@@ -1,0 +1,2 @@
+# macOS のキーチェーンの証明書を使う。会社 VPN / オフィスの FortiSASE の CA はキーチェーンで信頼済み
+system-certs = true

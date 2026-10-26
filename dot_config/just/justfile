@@ -202,11 +202,7 @@ claude-rev branch *args:
     fi
 
     cd "${WORKTREE_DIR}"
-    if scutil --dns 2>/dev/null | grep -q "wni.co.jp"; then
-      NODE_EXTRA_CA_CERTS="$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer" claude {{ args }}
-    else
-      claude {{ args }}
-    fi
+    claude {{ args }}
 
 # ================================
 #            Python

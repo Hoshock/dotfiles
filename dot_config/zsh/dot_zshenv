@@ -20,6 +20,11 @@ export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
+# 会社 VPN / オフィスの FortiSASE の CA。Node と bun の信頼リストに追加されるだけなので社外でも影響はない
+if [[ -f "$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer" ]]; then
+    export NODE_EXTRA_CA_CERTS="$HOME/FortiSASE/Fortinet_CA_SSL_SASE+FG.cer"
+fi
+
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/python_history"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 

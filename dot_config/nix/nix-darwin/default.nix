@@ -1,9 +1,23 @@
-{ username, homedir, ... }:
+{
+  lib,
+  username,
+  homedir,
+  ...
+}:
+let
+  # 会社 VPN / オフィスの FortiSASE は TLS を Fortinet の CA で署名し直す。
+  # dotfiles は public なので証明書はコミットせず、chezmoi が ~/FortiSASE から生成する。
+  corpCA = ../certs/corp-ca.pem;
+in
 {
   nix.settings.trusted-users = [
     "root"
     username
   ];
+
+  # /etc/ssl/certs/ca-certificates.crt (NIX_SSL_CERT_FILE) に追加される。
+  # 信頼する CA が増えるだけなので、社外のネットワークでもそのまま動く。
+  security.pki.certificateFiles = lib.optional (builtins.pathExists corpCA) corpCA;
 
   system = {
     stateVersion = 6;
