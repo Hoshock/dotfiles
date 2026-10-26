@@ -211,14 +211,14 @@ track=$(fg "$C_TRACK")
 line2="${track} ╰─${RST} "
 
 if [ -n "$model" ]; then
-    line2="${line2}$(fg "$C_MODEL")✦ ${ESC}[1m${model}${ESC}[22m${RST}"
+    line2="${line2}$(fg "$C_MODEL")${ESC}[1m${model}${ESC}[22m${RST}"
     if [ -n "$effort" ]; then
         case "$effort" in
-            low) lv=1 ec=$C_GRAY ;;
-            medium) lv=2 ec=$C_B_AQUA ;;
-            high) lv=3 ec=$C_B_YELLOW ;;
-            xhigh) lv=4 ec=$C_B_ORANGE ;;
-            *) lv=5 ec=$C_B_RED ;; # max
+        low) lv=1 ec=$C_GRAY ;;
+        medium) lv=2 ec=$C_B_AQUA ;;
+        high) lv=3 ec=$C_B_YELLOW ;;
+        xhigh) lv=4 ec=$C_B_ORANGE ;;
+        *) lv=5 ec=$C_B_RED ;; # max
         esac
         dots=""
         i=1
@@ -230,9 +230,9 @@ if [ -n "$model" ]; then
             fi
             i=$((i + 1))
         done
-        line2="${line2} ${dim}▸${RST} $(fg "$ec")${effort} ${dots}${RST}"
+        line2="${line2}${dim} / ${RST}$(fg "$ec")${effort} ${dots}${RST}"
     fi
-    line2="${line2}${dim} · ${RST}"
+    line2="${line2}${dim} / ${RST}"
 fi
 
 if [ -n "$ctx_used" ]; then
@@ -252,6 +252,6 @@ if [ -n "$ctx_used" ]; then
 else
     line2="${line2}${dim}ctx ${track}━━━━━━━━━━━━ ${dim}--${RST}"
 fi
-line2="${line2}${dim} · ${mode}${RST}"
+line2="${line2}${dim} / ${mode}${RST}"
 
 printf '%s\n%s' "$line1" "$line2"

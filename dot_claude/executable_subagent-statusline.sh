@@ -1,6 +1,6 @@
 #!/bin/sh
 # Subagent rows in the agent panel, styled like line 2 of statusline-command.sh:
-#   ✦ <model> ▸ <effort ●●●○○> · ctx <bar> <pct> · <label>
+#   <model> / <effort ●●●○○> / ctx <bar> <pct> / <label>
 # stdin: {"columns": N, "tasks": [{id, name?, status, description, label, model?, effort?, contextWindowSize?, tokenCount}, ...]}
 # stdout: one {"id": ..., "content": ...} line per task (see the statusline docs, "Subagent status lines").
 # A task without effort runs on the session's effort. Take it from the latest assistant entry of the
@@ -34,11 +34,11 @@ def model_name:
     | (.n[:1] | ascii_upcase) + .n[1:] + (if .v == "" then "" else " " + (.v | gsub("-"; ".")) end);
 def effort_seg:
     if . == null then ""
-    elif type == "number" then " " + gray + "▸" + rst + " " + gray + (tostring) + rst
+    elif type == "number" then gray + " / " + (tostring) + rst
     else
         ({low: [1, "168;153;132"], medium: [2, "142;192;124"], high: [3, "250;189;47"],
           xhigh: [4, "254;128;25"]}[.] // [5, "251;73;52"]) as [$lv, $c]
-        | " " + gray + "▸" + rst + " " + fg($c) + . + " "
+        | gray + " / " + rst + fg($c) + . + " "
           + ([range(1; 6) | if . <= $lv then fg($c) + "●" else track + "○" end] | join("")) + rst
     end;
 def pct_color: if . >= 80 then fg("251;73;52") elif . >= 50 then fg("250;189;47") else fg("184;187;38") end;
@@ -55,11 +55,11 @@ def ctx_seg($tokens; $size):
 | .tasks[]?
 | (.status // "running") as $st
 | (if $st == "running" then "" elif $st == "completed" then fg("184;187;38") + "✓ " + rst else fg("251;73;52") + "✗ " + rst end) as $mark
-| (if .model then fg("211;134;155") + "✦ " + esc + "1m" + (.model | model_name) + esc + "22m" + rst else gray + "✦ …" + rst end) as $m
-| ($mark + $m + ((.effort // (if $session_effort == "" then null else $session_effort end)) | effort_seg) + gray + " · " + rst + ctx_seg(.tokenCount // 0; .contextWindowSize)) as $head
+| (if .model then fg("211;134;155") + esc + "1m" + (.model | model_name) + esc + "22m" + rst else gray + "…" + rst end) as $m
+| ($mark + $m + ((.effort // (if $session_effort == "" then null else $session_effort end)) | effort_seg) + gray + " / " + rst + ctx_seg(.tokenCount // 0; .contextWindowSize)) as $head
 # visible width of $head without escapes, then fit the label into the rest
 | ($head | gsub("\u001b\\[[0-9;]*m"; "") | width) as $hw
-| ([.name, (.label // .description)] | map(select(. != null and . != "")) | if length == 2 and .[0] == .[1] then .[:1] else . end | join(" · ")) as $text
+| ([.name, (.label // .description)] | map(select(. != null and . != "")) | if length == 2 and .[0] == .[1] then .[:1] else . end | join(" / ")) as $text
 | ($cols - $hw - 3) as $room
-| {id, content: ($head + (if $room >= 6 and $text != "" then gray + " · " + ($text | clip($room)) + rst else "" end))}
+| {id, content: ($head + (if $room >= 6 and $text != "" then gray + " / " + ($text | clip($room)) + rst else "" end))}
 '
