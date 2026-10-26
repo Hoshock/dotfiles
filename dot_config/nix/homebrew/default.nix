@@ -111,7 +111,7 @@
       vscode "astral-sh.ty"
       vscode "vitest.explorer"
       vscode "Vue.volar"
-      vscode "CelianRiboulet.webvalidator"
+      # vscode "CelianRiboulet.webvalidator"
       vscode "nefrob.vscode-just-syntax"
       # vscode "redhat.vscode-yaml"
       vscode "mosapride.zenkaku"
