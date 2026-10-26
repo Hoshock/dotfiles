@@ -1,0 +1,3 @@
+# deno 用。npm は NPM_CONFIG_USERCONFIG で ~/.config/npm/npmrc を読むのでこのファイルは見ない。
+# deno は NPM_CONFIG_USERCONFIG を見ずに ~/.npmrc を読む (deno 2.9.7 で確認)
+min-release-age=7

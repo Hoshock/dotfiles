@@ -66,3 +66,15 @@ Copy the content of [setup.sh](setup.sh) and run it in your terminal.
 ### Later Update
 
 Just run `jg update`.
+
+Updates wait out a release cooldown (`cooldown_days` in the justfile, 7 days) to reduce exposure to supply chain attacks:
+
+| Target                       | How                                                                                      |
+| ---------------------------- | ---------------------------------------------------------------------------------------- |
+| Nix packages                 | `jg flake-update` pins flake inputs to the latest commit older than the cooldown         |
+| Homebrew formulae and casks  | `jg brew-upgrade` upgrades only packages whose tap definition is older than the cooldown |
+| VS Code extensions           | `jg vscode-ext-upgrade` installs the latest stable version older than the cooldown       |
+| Node.js (Vite+)              | `jg node-default` pins the default to the latest LTS older than the cooldown             |
+| npm / pnpm / bun / uv / deno | Each tool's native minimum release age setting                                           |
+
+Apps that update themselves have their updaters turned off, except browsers, which keep auto-updating so security fixes are not delayed.

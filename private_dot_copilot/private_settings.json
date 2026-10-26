@@ -1,4 +1,5 @@
 {
+  "autoUpdate": false,
   "experimental": true,
   "defaultMode": "interactive",
   "defaultPermissionMode": "assisted",

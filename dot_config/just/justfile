@@ -2,6 +2,7 @@ hostname := `scutil --get LocalHostName`
 projects := "${HOME}/Projects"
 workspace := "${HOME}/Projects/Workspace"
 nixdir := "${HOME}/.config/nix"
+cooldown_days := "7"
 
 default:
     @just -g -l
@@ -166,10 +167,48 @@ darwin:
 gc:
     nix store gc
 
+# Update flake inputs to the latest commit older than cooldown_days
+[group('nix')]
+flake-update:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    until=$(date -u -v-{{ cooldown_days }}d +%Y-%m-%dT%H:%M:%SZ)
+    args=()
+    for spec in nixos/nixpkgs:nixpkgs-unstable:nixpkgs \
+                LnL7/nix-darwin:master:nix-darwin \
+                nix-community/home-manager:master:home-manager; do
+        IFS=: read -r repo branch input <<< "${spec}"
+        rev=$(gh api "repos/${repo}/commits?sha=${branch}&until=${until}&per_page=1" --jq '.[0].sha')
+        echo "${input}: ${rev}"
+        args+=(--override-input "${input}" "github:${repo}/${rev}")
+    done
+    nix flake update --flake {{ nixdir }} "${args[@]}"
+
+# Upgrade Homebrew packages whose definition is older than cooldown_days
+# ブラウザ (0-day の修正を遅らせない) と sha256 :no_check の cask はアプリ自身の自動更新に任せる
+[group('nix')]
+brew-upgrade *args:
+    {{ justfile_directory() }}/brew-upgrade-cooled.py --days {{ cooldown_days }} --skip arc google-chrome thebrowsercompany-dia {{ args }}
+
+# Upgrade VS Code extensions to the latest stable version older than cooldown_days
+[group('nix')]
+vscode-ext-upgrade *args:
+    {{ justfile_directory() }}/vscode-ext-upgrade-cooled.py --days {{ cooldown_days }} {{ args }}
+
+# Pin the Vite+ default Node.js to the latest LTS older than cooldown_days
+[group('nix')]
+node-default:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    until=$(date -u -v-{{ cooldown_days }}d +%Y-%m-%d)
+    version=$(/usr/bin/curl -fsS https://nodejs.org/dist/index.json \
+        | jq -r --arg until "${until}" '[.[] | select(.lts != false and .date <= $until)][0].version')
+    vp env default "${version}"
+
 # Install tools managed outside nix
 [group('nix')]
 install:
-    bash {{ projects }}/dotfiles/install.sh
+    COOLDOWN_DAYS={{ cooldown_days }} bash {{ projects }}/dotfiles/install.sh
 
 # Update dotfiles and apply nix-darwin configuration
 [group('nix')]
@@ -177,9 +216,11 @@ update flag="partial":
     chezmoi diff
     chezmoi apply
     {{ if flag == "full" { "just -g install" } else { "" } }}
-    nix flake update --flake {{ nixdir }}
+    @just -g flake-update
     @just -g darwin
-    brew upgrade
+    @just -g brew-upgrade
+    @just -g vscode-ext-upgrade
+    @just -g node-default
     nix store gc
     brew cleanup
 

@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+# ~/.codex/config.toml は codex 自身も書き換えるため、chezmoi では更新チェックの無効化だけを保証する。
+# codex は nix で入れ、更新は flake のクールタイムに任せる。
+import re
+import sys
+
+KEY = "check_for_update_on_startup = false"
+s = sys.stdin.read()
+if re.search(r"(?m)^check_for_update_on_startup\s*=", s):
+    s = re.sub(r"(?m)^check_for_update_on_startup\s*=.*$", KEY, s)
+else:
+    # トップレベルのキーなので、最初のテーブルより前に置く
+    s = f"{KEY}\n{s}"
+sys.stdout.write(s)

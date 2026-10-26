@@ -1,2 +1,6 @@
 # macOS のキーチェーンの証明書を使う。会社 VPN / オフィスの FortiSASE の CA はキーチェーンで信頼済み
 system-certs = true
+
+# 公開から 7 日経っていないバージョンは入れない (サプライチェーン攻撃対策)。
+# uv.lock には exclude-newer-span として記録される
+exclude-newer = "7 days"

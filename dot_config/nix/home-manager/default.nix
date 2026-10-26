@@ -16,6 +16,7 @@
       awscli2
       bat
       chezmoi
+      codex
       colima
       copilot-language-server
       delta
@@ -27,6 +28,7 @@
       fzf
       gh
       git
+      github-copilot-cli
       htop
       jnv
       jq
