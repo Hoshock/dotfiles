@@ -2,7 +2,7 @@
   "autoUpdatesChannel": "stable",
   "cleanupPeriodDays": 180,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "0"
   },
   "model": "sonnet",
   "hooks": {
