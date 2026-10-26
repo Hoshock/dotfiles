@@ -25,13 +25,17 @@
       docker
       duckdb
       eza
+      ffmpeg
       fzf
       gh
+      ghq
       git
       github-copilot-cli
       htop
+      hunk
       jnv
       jq
+      jujutsu
       just
       just-lsp
       lazygit
@@ -42,6 +46,7 @@
       nixfmt
       nodejsPkg
       pnpmPkg
+      poppler-utils
       prettier
       python313Packages.cfn-lint
       python313Packages.httpie
@@ -61,7 +66,9 @@
       uv
       wget
       wrangler
+      xcodegen
       xdg-ninja
+      yazi
       yq-go
       zoxide
     ];

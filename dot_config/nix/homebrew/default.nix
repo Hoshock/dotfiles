@@ -4,18 +4,12 @@
     enable = true;
     onActivation.autoUpdate = true;
 
+    # gcc と libomp は nixpkgs にもあるが、Python の wheel やビルドが /opt/homebrew のパスを前提にするため brew に置く
     brews = [
       "aws-sam-cli"
-      "ffmpeg"
       "gcc"
-      "ghq"
-      "hunk"
-      "jj"
       "libomp"
       "microsoft/apm/apm"
-      "poppler"
-      "xcodegen"
-      "yazi"
     ];
 
     casks = [
