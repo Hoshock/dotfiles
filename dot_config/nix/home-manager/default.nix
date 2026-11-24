@@ -16,7 +16,6 @@
       awscli2
       bat
       chezmoi
-      codex
       colima
       copilot-language-server
       delta

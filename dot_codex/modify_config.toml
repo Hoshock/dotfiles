@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ~/.codex/config.toml は codex 自身も書き換えるため、chezmoi では更新チェックの無効化だけを保証する。
-# codex は nix で入れ、更新は flake のクールタイムに任せる。
+# codex は公式インストーラーで入れる (install.sh)。バージョンはそこでクールタイムを過ぎたものに固定する。
 import re
 import sys
 
