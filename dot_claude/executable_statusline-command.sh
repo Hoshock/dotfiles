@@ -74,7 +74,17 @@ fields=$(echo "$input" | jq -r '[
     .model.display_name // "",
     .effort.level // "",
     .context_window.used_percentage // "",
-    .workspace.current_dir // .cwd // ""
+    .workspace.current_dir // .cwd // "",
+    (.prompt_cache.warm | if . == null then "" else tostring end),
+    .prompt_cache.expires_at // "",
+    .prompt_cache.hit_ratio // "",
+    .context_window.current_usage.cache_read_input_tokens // "",
+    .context_window.current_usage.cache_creation_input_tokens // "",
+    .rate_limits.five_hour.used_percentage // "",
+    .rate_limits.five_hour.resets_at // "",
+    .rate_limits.seven_day.used_percentage // "",
+    .rate_limits.seven_day.resets_at // "",
+    .cost.total_cost_usd // ""
 ] | map(tostring) | join("\u001f")')
 OLDIFS=$IFS
 IFS=$(printf '\037')
@@ -85,6 +95,16 @@ model=$1
 effort=$2
 ctx_used=$3
 cwd=$4
+cache_warm=$5
+cache_exp=$6
+cache_hit=$7
+cache_r=$8
+cache_w=$9
+rl5_pct=${10}
+rl5_reset=${11}
+rl7_pct=${12}
+rl7_reset=${13}
+cost_usd=${14}
 
 if [ -n "$ANTHROPIC_BASE_URL" ]; then
     mode="API"
@@ -254,4 +274,93 @@ else
 fi
 line2="${line2}${dim} / ${mode}${RST}"
 
-printf '%s\n%s' "$line1" "$line2"
+# ---------- line 3: prompt cache / rate limits / cost ----------
+# mkbar <pct> <width>: "━" bar in pct_color, track for the rest
+mkbar() {
+    b_pct=$1
+    b_w=$2
+    b_filled=$((b_pct * b_w / 100))
+    [ "$b_filled" -gt "$b_w" ] && b_filled=$b_w
+    b_on=""
+    b_off=""
+    b_i=0
+    while [ "$b_i" -lt "$b_w" ]; do
+        if [ "$b_i" -lt "$b_filled" ]; then b_on="${b_on}━"; else b_off="${b_off}━"; fi
+        b_i=$((b_i + 1))
+    done
+    printf '%s%s%s%s' "$(pct_color "$b_pct")" "$b_on" "$track" "$b_off"
+}
+
+# fmt_dur <seconds>: 3d4h / 2h10m / 52m
+fmt_dur() {
+    d_s=$1
+    [ "$d_s" -lt 0 ] && d_s=0
+    if [ "$d_s" -ge 86400 ]; then
+        printf '%dd%dh' $((d_s / 86400)) $((d_s % 86400 / 3600))
+    elif [ "$d_s" -ge 3600 ]; then
+        printf '%dh%dm' $((d_s / 3600)) $((d_s % 3600 / 60))
+    else
+        printf '%dm' $((d_s / 60))
+    fi
+}
+
+# fmt_tok <n>: 120k / 3.2k / 850
+fmt_tok() {
+    awk -v n="$1" 'BEGIN {
+        if (n >= 100000) printf "%dk", n / 1000
+        else if (n >= 1000) printf "%.1fk", n / 1000
+        else printf "%d", n
+    }'
+}
+
+# rate_seg <label> <pct> <resets_at>: "5h ━━━━━━ 23% ↻2h10m"
+rate_seg() {
+    r_pct=$(printf '%.0f' "$2")
+    r_out="${dim}$1 $(mkbar "$r_pct" 6) $(pct_color "$r_pct")${r_pct}%${RST}"
+    if [ -n "$3" ]; then
+        r_out="${r_out}${dim} ↻$(fmt_dur $(($3 - now)))${RST}"
+    fi
+    printf '%s' "$r_out"
+}
+
+now=$(date +%s)
+sep="${dim} / ${RST}"
+line3=""
+add3() {
+    if [ -z "$line3" ]; then line3=$1; else line3="${line3}${sep}$1"; fi
+}
+
+# cache: warm shows the time left until the cache expires; cold shows why the next turn is heavy
+if [ -n "$cache_warm" ]; then
+    left=""
+    [ -n "$cache_exp" ] && left=$((cache_exp - now))
+    if [ "$cache_warm" = "true" ] && { [ -z "$left" ] || [ "$left" -gt 0 ]; }; then
+        txt="$(fg "$C_B_GREEN")●warm${RST}"
+        if [ -n "$left" ]; then
+            if [ "$left" -lt 180 ]; then
+                tc=$C_B_RED
+            elif [ "$left" -lt 600 ]; then
+                tc=$C_B_YELLOW
+            else
+                tc=$C_B_GREEN
+            fi
+            txt="${txt} $(fg "$tc")↻$(fmt_dur "$left")${RST}"
+        fi
+    else
+        txt="$(fg "$C_B_RED")○cold${RST}"
+    fi
+    if [ -n "$cache_r" ] || [ -n "$cache_w" ]; then
+        txt="${txt}${dim} r $(fmt_tok "${cache_r:-0}") w $(fmt_tok "${cache_w:-0}")${RST}"
+    fi
+    add3 "$txt"
+fi
+
+[ -n "$rl5_pct" ] && add3 "$(rate_seg 5h "$rl5_pct" "$rl5_reset")"
+[ -n "$rl7_pct" ] && add3 "$(rate_seg 7d "$rl7_pct" "$rl7_reset")"
+[ -n "$cost_usd" ] && add3 "${dim}$(printf '$%.2f' "$cost_usd")${RST}"
+
+if [ -n "$line3" ]; then
+    printf '%s\n%s\n%s' "$line1" "$line2" "${track} ╰─${RST} ${line3}"
+else
+    printf '%s\n%s' "$line1" "$line2"
+fi
