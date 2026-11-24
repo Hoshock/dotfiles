@@ -26,7 +26,7 @@
   // 本体と拡張の更新は just -g update がクールタイム付きで行う。
   // extensions.autoUpdateDelay は microsoft / github / openai の拡張に効かないため使わない
   "extensions.autoCheckUpdates": false,
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "off",
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.nix.tmpl": "nix",
