@@ -1,5 +1,4 @@
 {
-  "autoUpdatesChannel": "stable",
   "cleanupPeriodDays": 180,
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "0"
@@ -96,7 +95,8 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "$HOME/.claude/statusline-command.sh"
+    "command": "$HOME/.claude/statusline-command.sh",
+    "refreshInterval": 30
   },
   "subagentStatusLine": {
     "type": "command",
@@ -132,9 +132,10 @@
       "effortLevel": "medium"
     },
     "claude-opus-5-5": {
-      "effortLevel": "high"
+      "effortLevel": "medium"
     }
   },
+  "autoUpdatesChannel": "stable",
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
