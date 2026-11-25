@@ -110,7 +110,7 @@
     "hoshock@wni-claude-code-marketplace": true,
     "feature-dev@claude-plugins-official": false,
     "claude-md-management@claude-plugins-official": false,
-    "ncpd@wni-claude-code-marketplace": true,
+    "ncpd@wni-claude-code-marketplace": false,
     "code-review@claude-plugins-official": false,
     "claude-security@claude-plugins-official": true,
     "security-guidance@anthropic-plugin-directory": true
