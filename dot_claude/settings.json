@@ -1,8 +1,7 @@
 {
   "cleanupPeriodDays": 180,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "0",
-    "HOSHOCK_LESSONS": "/Users/ish-ts/.local/state/hoshock/lessons.md"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "0"
   },
   "model": "sonnet",
   "hooks": {
