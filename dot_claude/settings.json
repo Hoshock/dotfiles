@@ -2,7 +2,7 @@
   "cleanupPeriodDays": 180,
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "0",
-    "HOSHOCK_LESSONS": "/Users/ish-ts/Projects/WNI-Claude-Code-Marketplace/docs/hoshock/lessons.md"
+    "HOSHOCK_LESSONS": "/Users/ish-ts/.local/state/hoshock/lessons.md"
   },
   "model": "sonnet",
   "hooks": {
